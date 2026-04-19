@@ -6,6 +6,7 @@ option go_package = "github.com/BlackHole55/unishare-proto";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 
 enum ResourceStatus {
   UNSPECIFIED = 0;
@@ -75,9 +76,8 @@ message UpdateResourceRequest {
   string id = 1;
   string requester_id = 2;
   string requester_role = 3;
-  string title = 4;
-  string description = 5;
-  ResourceStatus status = 6;
+  ResourceResponse resource = 4;
+  google.protobuf.FieldMask update_mask = 5;
 }
 
 message DeleteResourceRequest {

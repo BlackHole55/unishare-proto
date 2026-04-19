@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -423,9 +424,8 @@ type UpdateResourceRequest struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	RequesterId   string                 `protobuf:"bytes,2,opt,name=requester_id,json=requesterId,proto3" json:"requester_id,omitempty"`
 	RequesterRole string                 `protobuf:"bytes,3,opt,name=requester_role,json=requesterRole,proto3" json:"requester_role,omitempty"`
-	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Status        ResourceStatus         `protobuf:"varint,6,opt,name=status,proto3,enum=resource.ResourceStatus" json:"status,omitempty"`
+	Resource      *ResourceResponse      `protobuf:"bytes,4,opt,name=resource,proto3" json:"resource,omitempty"`
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,5,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -481,25 +481,18 @@ func (x *UpdateResourceRequest) GetRequesterRole() string {
 	return ""
 }
 
-func (x *UpdateResourceRequest) GetTitle() string {
+func (x *UpdateResourceRequest) GetResource() *ResourceResponse {
 	if x != nil {
-		return x.Title
+		return x.Resource
 	}
-	return ""
+	return nil
 }
 
-func (x *UpdateResourceRequest) GetDescription() string {
+func (x *UpdateResourceRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 	if x != nil {
-		return x.Description
+		return x.UpdateMask
 	}
-	return ""
-}
-
-func (x *UpdateResourceRequest) GetStatus() ResourceStatus {
-	if x != nil {
-		return x.Status
-	}
-	return ResourceStatus_UNSPECIFIED
+	return nil
 }
 
 type DeleteResourceRequest struct {
@@ -670,7 +663,7 @@ var File_resource_proto protoreflect.FileDescriptor
 
 const file_resource_proto_rawDesc = "" +
 	"\n" +
-	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xd8\x02\n" +
+	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\"\xd8\x02\n" +
 	"\x10ResourceResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\tR\aownerId\x12\x14\n" +
@@ -700,14 +693,14 @@ const file_resource_proto_rawDesc = "" +
 	"\x15ListResourcesResponse\x128\n" +
 	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount\"\xdb\x01\n" +
+	"totalCount\"\xe6\x01\n" +
 	"\x15UpdateResourceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\frequester_id\x18\x02 \x01(\tR\vrequesterId\x12%\n" +
-	"\x0erequester_role\x18\x03 \x01(\tR\rrequesterRole\x12\x14\n" +
-	"\x05title\x18\x04 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x120\n" +
-	"\x06status\x18\x06 \x01(\x0e2\x18.resource.ResourceStatusR\x06status\"q\n" +
+	"\x0erequester_role\x18\x03 \x01(\tR\rrequesterRole\x126\n" +
+	"\bresource\x18\x04 \x01(\v2\x1a.resource.ResourceResponseR\bresource\x12;\n" +
+	"\vupdate_mask\x18\x05 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\"q\n" +
 	"\x15DeleteResourceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\frequester_id\x18\x02 \x01(\tR\vrequesterId\x12%\n" +
@@ -759,31 +752,33 @@ var file_resource_proto_goTypes = []any{
 	(*ValidateRequest)(nil),       // 8: resource.ValidateRequest
 	(*ValidateResponse)(nil),      // 9: resource.ValidateResponse
 	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 11: google.protobuf.Empty
+	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),         // 12: google.protobuf.Empty
 }
 var file_resource_proto_depIdxs = []int32{
 	0,  // 0: resource.ResourceResponse.status:type_name -> resource.ResourceStatus
 	10, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
 	10, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 3: resource.ListResourcesResponse.resources:type_name -> resource.ResourceResponse
-	0,  // 4: resource.UpdateResourceRequest.status:type_name -> resource.ResourceStatus
-	2,  // 5: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
-	3,  // 6: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
-	4,  // 7: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
-	6,  // 8: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
-	7,  // 9: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
-	8,  // 10: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
-	1,  // 11: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
-	1,  // 12: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
-	5,  // 13: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
-	1,  // 14: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
-	11, // 15: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
-	9,  // 16: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	1,  // 4: resource.UpdateResourceRequest.resource:type_name -> resource.ResourceResponse
+	11, // 5: resource.UpdateResourceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	2,  // 6: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
+	3,  // 7: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
+	4,  // 8: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
+	6,  // 9: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
+	7,  // 10: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
+	8,  // 11: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
+	1,  // 12: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
+	1,  // 13: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
+	5,  // 14: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
+	1,  // 15: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
+	12, // 16: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
+	9,  // 17: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
+	12, // [12:18] is the sub-list for method output_type
+	6,  // [6:12] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_resource_proto_init() }
