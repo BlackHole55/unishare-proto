@@ -86,7 +86,7 @@ type ResourceResponse struct {
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
 	IsDigital     bool                   `protobuf:"varint,6,opt,name=is_digital,json=isDigital,proto3" json:"is_digital,omitempty"`
-	Status        string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Status        ResourceStatus         `protobuf:"varint,7,opt,name=status,proto3,enum=resource.ResourceStatus" json:"status,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -165,11 +165,11 @@ func (x *ResourceResponse) GetIsDigital() bool {
 	return false
 }
 
-func (x *ResourceResponse) GetStatus() string {
+func (x *ResourceResponse) GetStatus() ResourceStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return ResourceStatus_UNSPECIFIED
 }
 
 func (x *ResourceResponse) GetCreatedAt() *timestamppb.Timestamp {
@@ -425,7 +425,7 @@ type UpdateResourceRequest struct {
 	RequesterRole string                 `protobuf:"bytes,3,opt,name=requester_role,json=requesterRole,proto3" json:"requester_role,omitempty"`
 	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	Status        ResourceStatus         `protobuf:"varint,6,opt,name=status,proto3,enum=resource.ResourceStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,11 +495,11 @@ func (x *UpdateResourceRequest) GetDescription() string {
 	return ""
 }
 
-func (x *UpdateResourceRequest) GetStatus() string {
+func (x *UpdateResourceRequest) GetStatus() ResourceStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return ResourceStatus_UNSPECIFIED
 }
 
 type DeleteResourceRequest struct {
@@ -670,7 +670,7 @@ var File_resource_proto protoreflect.FileDescriptor
 
 const file_resource_proto_rawDesc = "" +
 	"\n" +
-	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xbe\x02\n" +
+	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xd8\x02\n" +
 	"\x10ResourceResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\tR\aownerId\x12\x14\n" +
@@ -678,8 +678,8 @@ const file_resource_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1d\n" +
 	"\n" +
-	"is_digital\x18\x06 \x01(\bR\tisDigital\x12\x16\n" +
-	"\x06status\x18\a \x01(\tR\x06status\x129\n" +
+	"is_digital\x18\x06 \x01(\bR\tisDigital\x120\n" +
+	"\x06status\x18\a \x01(\x0e2\x18.resource.ResourceStatusR\x06status\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -700,14 +700,14 @@ const file_resource_proto_rawDesc = "" +
 	"\x15ListResourcesResponse\x128\n" +
 	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount\"\xc1\x01\n" +
+	"totalCount\"\xdb\x01\n" +
 	"\x15UpdateResourceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\frequester_id\x18\x02 \x01(\tR\vrequesterId\x12%\n" +
 	"\x0erequester_role\x18\x03 \x01(\tR\rrequesterRole\x12\x14\n" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\"q\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x120\n" +
+	"\x06status\x18\x06 \x01(\x0e2\x18.resource.ResourceStatusR\x06status\"q\n" +
 	"\x15DeleteResourceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\frequester_id\x18\x02 \x01(\tR\vrequesterId\x12%\n" +
@@ -762,26 +762,28 @@ var file_resource_proto_goTypes = []any{
 	(*emptypb.Empty)(nil),         // 11: google.protobuf.Empty
 }
 var file_resource_proto_depIdxs = []int32{
-	10, // 0: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
-	10, // 1: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
-	1,  // 2: resource.ListResourcesResponse.resources:type_name -> resource.ResourceResponse
-	2,  // 3: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
-	3,  // 4: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
-	4,  // 5: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
-	6,  // 6: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
-	7,  // 7: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
-	8,  // 8: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
-	1,  // 9: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
-	1,  // 10: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
-	5,  // 11: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
-	1,  // 12: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
-	11, // 13: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
-	9,  // 14: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
-	9,  // [9:15] is the sub-list for method output_type
-	3,  // [3:9] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	0,  // 0: resource.ResourceResponse.status:type_name -> resource.ResourceStatus
+	10, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
+	10, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 3: resource.ListResourcesResponse.resources:type_name -> resource.ResourceResponse
+	0,  // 4: resource.UpdateResourceRequest.status:type_name -> resource.ResourceStatus
+	2,  // 5: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
+	3,  // 6: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
+	4,  // 7: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
+	6,  // 8: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
+	7,  // 9: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
+	8,  // 10: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
+	1,  // 11: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
+	1,  // 12: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
+	5,  // 13: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
+	1,  // 14: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
+	11, // 15: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
+	9,  // 16: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_resource_proto_init() }

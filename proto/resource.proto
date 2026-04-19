@@ -43,7 +43,7 @@ message ResourceResponse {
   string description = 4;
   string category = 5;
   bool is_digital = 6;
-  string status = 7;
+  ResourceStatus status = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
 }
@@ -77,7 +77,7 @@ message UpdateResourceRequest {
   string requester_role = 3;
   string title = 4;
   string description = 5;
-  string status = 6;
+  ResourceStatus status = 6;
 }
 
 message DeleteResourceRequest {
