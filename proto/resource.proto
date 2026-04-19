@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package resource;
+
+option go_package = "github.com/BlackHole55/unishare-proto";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+enum ResourceStatus {
+  UNSPECIFIED = 0;
+  AVAILABLE = 1;
+  RESERVED = 2;
+  ARCHIVED = 3;
+  BANNED = 4;
+}
+
+// Resource Service
+service ResourceService {
+  // CREATE: Post a new resource
+  rpc CreateResource (CreateResourceRequest) returns (ResourceResponse);
+
+  // READ: Get a single resource by ID
+  rpc GetResource (GetResourceRequest) returns (ResourceResponse);
+
+  // READ: List resources with filtering 
+  rpc ListResources (ListResourcesRequest) returns (ListResourcesResponse);
+
+  // UPDATE: Edit resource details
+  rpc UpdateResource (UpdateResourceRequest) returns (ResourceResponse);
+
+  // DELETE: Remove a resource
+  rpc DeleteResource (DeleteResourceRequest) returns (google.protobuf.Empty);
+
+  // INTERNAL: Used by Request Service to verify availability
+  rpc ValidateForRequest (ValidateRequest) returns (ValidateResponse);
+}
+
+message ResourceResponse {
+  string id = 1;
+  string owner_id = 2;
+  string title = 3;
+  string description = 4;
+  string category = 5;
+  bool is_digital = 6;
+  string status = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message CreateResourceRequest {
+  string owner_id = 1;
+  string title = 2;
+  string description = 3;
+  string category = 4;
+  bool is_digital = 5;
+}
+
+message GetResourceRequest {
+  string id = 1;
+}
+
+message ListResourcesRequest {
+  string category = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message ListResourcesResponse {
+  repeated ResourceResponse resources = 1;
+  int32 total_count = 2;
+}
+
+message UpdateResourceRequest {
+  string id = 1;
+  string requester_id = 2;
+  string requester_role = 3;
+  string title = 4;
+  string description = 5;
+  string status = 6;
+}
+
+message DeleteResourceRequest {
+  string id = 1;
+  string requester_id = 2;
+  string requester_role = 3;
+}
+
+message ValidateRequest {
+  string id = 1;
+}
+
+message ValidateResponse {
+  bool is_available = 1;
+  string owner_id = 2;
+  string title = 3;
+}
