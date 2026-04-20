@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package identity;
+
+option go_package = "github.com/BlackHole55/unishare-proto/identity;identity";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_ACTIVE = 1;
+  USER_STATUS_BANNED = 2;
+}
+
+enum UserRole {
+  ROLE_USER = 0;
+  ROLE_MODERATOR = 1;
+  ROLE_ADMIN = 2;
+}
+
+
+service IdentityService {
+    rpc Register (RegisterRequest) returns (AuthResponse);
+    rpc Login (LoginRequest) returns (AuthResponse);
+    rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+    rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse);
+    rpc GetUser (GetUserRequest) returns (UserResponse);
+    rpc ListUsers (GetUsersRequest) returns (GetUsersResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+message UserResponse {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    UserRole role = 4;
+    UserStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message AuthResponse {
+    string access_token = 1;
+    string refresh_token = 2;
+    UserResponse user = 3;
+}
+
+message RegisterRequest {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message UpdateUserRequest {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    UserRole role = 4;
+    UserStatus status = 5;
+    google.protobuf.FieldMask update_mask = 6;
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+message GetUsersRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message GetUsersResponse {
+    repeated UserResponse users = 1;
+    int32 total_count = 2;
+}
+
+message DeleteUserRequest {
+    string user_id = 1;     
+}
+
+message ValidateTokenRequest {
+    string token = 1;
+}
+
+message ValidateTokenResponse {
+    string user_id = 1;
+    bool is_valid = 2;
+    UserRole role = 3;
+    string email = 4;                      
+    google.protobuf.Timestamp expires_at = 5;
+}
+
+message RefreshTokenRequest {
+    string refresh_token = 1;
+}
