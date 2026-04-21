@@ -33,7 +33,7 @@ service IdentityService {
 }
 
 message UserResponse {
-    string id = 1;
+    uint64 id = 1;
     string username = 2;
     string email = 3;
     UserRole role = 4;
