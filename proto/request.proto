@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package request;
+
+option go_package = "github.com/BlackHole55/unishare-proto";
+
+import "google/protobuf/timestamp.proto";
+
+// Enums
+enum RequestStatus {
+  REQUEST_STATUS_UNSPECIFIED = 0;
+  REQUEST_STATUS_PENDING     = 1;
+  REQUEST_STATUS_APPROVED    = 2;
+  REQUEST_STATUS_REJECTED    = 3;
+  REQUEST_STATUS_ARCHIVED    = 4;
+}
+
+// Service
+service RequestService {
+  // Create a new request (status defaults to PENDING).
+  rpc CreateRequest(CreateRequestRequest) returns (CreateRequestResponse);
+
+  // Retrieve a single request by ID.
+  rpc GetRequest(GetRequestRequest) returns (GetRequestResponse);
+
+  // List requests with optional filters and pagination.
+  rpc ListRequests(ListRequestsRequest) returns (ListRequestsResponse);
+
+  // Transition a request to APPROVED, REJECTED, or ARCHIVED.
+  rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse);
+
+  // Permanently delete a request record.
+  rpc DeleteRequest(DeleteRequestRequest) returns (DeleteRequestResponse);
+}
+
+
+message Request {
+  string                    id           = 1;  // UUID
+  string                    resource_id  = 2;  // UUID
+  string                    requester_id = 3;  // UUID
+  string                    owner_id     = 4;  // UUID
+  string                    note         = 5;  // nullable – empty string = absent
+  RequestStatus             status       = 6;
+  google.protobuf.Timestamp created_at   = 7;
+  google.protobuf.Timestamp updated_at   = 8;
+}
+
+// CreateRequest
+message CreateRequestRequest {
+  string resource_id  = 1;
+  string requester_id = 2;
+  string owner_id     = 3;
+  string note         = 4;  // optional
+}
+
+message CreateRequestResponse {
+  Request request = 1;
+}
+
+// GetRequest
+message GetRequestRequest {
+  string id = 1;  // UUID of the request
+}
+
+message GetRequestResponse {
+  Request request = 1;
+}
+
+// ListRequests
+message ListRequestsRequest {
+  // At least one filter is recommended; all are optional.
+  string        requester_id = 1;  // filter by requester
+  string        owner_id     = 2;  // filter by owner
+  string        resource_id  = 3;  // filter by resource
+  RequestStatus status       = 4;  // filter by status (UNSPECIFIED = all)
+
+  int32  page_size  = 10;  // default 20, max 100
+  string page_token = 11;  // opaque cursor from previous response
+}
+
+message ListRequestsResponse {
+  repeated Request requests        = 1;
+  string           next_page_token = 2;  // empty when no more pages
+  int32            total_count     = 3;
+}
+
+// UpdateRequestStatus  (approve / reject / archive)
+message UpdateRequestStatusRequest {
+  string        id     = 1;
+  RequestStatus status = 2;  // new status; PENDING and UNSPECIFIED are invalid here
+}
+
+message UpdateRequestStatusResponse {
+  Request request = 1;
+}
+
+// DeleteRequest  (hard delete; prefer ARCHIVED for soft delete)
+message DeleteRequestRequest {
+  string id = 1;
+}
+
+message DeleteRequestResponse {}
