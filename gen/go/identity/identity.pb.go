@@ -124,7 +124,7 @@ func (UserRole) EnumDescriptor() ([]byte, []int) {
 
 type UserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Role          UserRole               `protobuf:"varint,4,opt,name=role,proto3,enum=identity.UserRole" json:"role,omitempty"`
@@ -165,11 +165,11 @@ func (*UserResponse) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *UserResponse) GetId() uint64 {
+func (x *UserResponse) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *UserResponse) GetUsername() string {
@@ -388,7 +388,7 @@ func (x *LoginRequest) GetPassword() string {
 
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Role          UserRole               `protobuf:"varint,4,opt,name=role,proto3,enum=identity.UserRole" json:"role,omitempty"`
@@ -428,11 +428,11 @@ func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UpdateUserRequest) GetId() uint64 {
+func (x *UpdateUserRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdateUserRequest) GetUsername() string {
@@ -472,7 +472,7 @@ func (x *UpdateUserRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 
 type GetUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -507,11 +507,11 @@ func (*GetUserRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetUserRequest) GetUserId() uint64 {
+func (x *GetUserRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type GetUsersRequest struct {
@@ -620,7 +620,7 @@ func (x *GetUsersResponse) GetTotalCount() int32 {
 
 type DeleteUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -655,11 +655,11 @@ func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *DeleteUserRequest) GetUserId() uint64 {
+func (x *DeleteUserRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type ValidateTokenRequest struct {
@@ -708,7 +708,7 @@ func (x *ValidateTokenRequest) GetToken() string {
 
 type ValidateTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	IsValid       bool                   `protobuf:"varint,2,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
 	Role          UserRole               `protobuf:"varint,3,opt,name=role,proto3,enum=identity.UserRole" json:"role,omitempty"`
 	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
@@ -747,11 +747,11 @@ func (*ValidateTokenResponse) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *ValidateTokenResponse) GetUserId() uint64 {
+func (x *ValidateTokenResponse) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 func (x *ValidateTokenResponse) GetIsValid() bool {
@@ -828,7 +828,7 @@ func (x *RefreshTokenRequest) GetRefreshToken() string {
 
 type BanUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -863,16 +863,16 @@ func (*BanUserRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *BanUserRequest) GetUserId() uint64 {
+func (x *BanUserRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type UnbanUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -907,16 +907,16 @@ func (*UnbanUserRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *UnbanUserRequest) GetUserId() uint64 {
+func (x *UnbanUserRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type PromoteToModeratorRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -951,16 +951,16 @@ func (*PromoteToModeratorRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *PromoteToModeratorRequest) GetUserId() uint64 {
+func (x *PromoteToModeratorRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type DemoteFromModeratorRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -995,11 +995,11 @@ func (*DemoteFromModeratorRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *DemoteFromModeratorRequest) GetUserId() uint64 {
+func (x *DemoteFromModeratorRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 var File_proto_identity_proto protoreflect.FileDescriptor
@@ -1008,7 +1008,7 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\n" +
 	"\x14proto/identity.proto\x12\bidentity\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\"\x9c\x02\n" +
 	"\fUserResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1a\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12&\n" +
 	"\x04role\x18\x04 \x01(\x0e2\x12.identity.UserRoleR\x04role\x12,\n" +
@@ -1029,7 +1029,7 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xe8\x01\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1a\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12&\n" +
 	"\x04role\x18\x04 \x01(\x0e2\x12.identity.UserRoleR\x04role\x12,\n" +
@@ -1037,7 +1037,7 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\vupdate_mask\x18\x06 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"?\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"?\n" +
 	"\x0fGetUsersRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x05R\x06offset\"a\n" +
@@ -1046,11 +1046,11 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\",\n" +
 	"\x11DeleteUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\",\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\",\n" +
 	"\x14ValidateTokenRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"\xc4\x01\n" +
 	"\x15ValidateTokenResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x19\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x19\n" +
 	"\bis_valid\x18\x02 \x01(\bR\aisValid\x12&\n" +
 	"\x04role\x18\x03 \x01(\x0e2\x12.identity.UserRoleR\x04role\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x129\n" +
@@ -1059,13 +1059,13 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\")\n" +
 	"\x0eBanUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"+\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"+\n" +
 	"\x10UnbanUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"4\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"4\n" +
 	"\x19PromoteToModeratorRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"5\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"5\n" +
 	"\x1aDemoteFromModeratorRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId*Y\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId*Y\n" +
 	"\n" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
