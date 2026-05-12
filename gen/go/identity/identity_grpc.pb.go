@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.1
-// source: identity.proto
+// source: proto/identity.proto
 
 package identity
 
@@ -20,14 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IdentityService_Register_FullMethodName      = "/identity.IdentityService/Register"
-	IdentityService_Login_FullMethodName         = "/identity.IdentityService/Login"
-	IdentityService_ValidateToken_FullMethodName = "/identity.IdentityService/ValidateToken"
-	IdentityService_RefreshToken_FullMethodName  = "/identity.IdentityService/RefreshToken"
-	IdentityService_GetUser_FullMethodName       = "/identity.IdentityService/GetUser"
-	IdentityService_ListUsers_FullMethodName     = "/identity.IdentityService/ListUsers"
-	IdentityService_UpdateUser_FullMethodName    = "/identity.IdentityService/UpdateUser"
-	IdentityService_DeleteUser_FullMethodName    = "/identity.IdentityService/DeleteUser"
+	IdentityService_Register_FullMethodName            = "/identity.IdentityService/Register"
+	IdentityService_Login_FullMethodName               = "/identity.IdentityService/Login"
+	IdentityService_ValidateToken_FullMethodName       = "/identity.IdentityService/ValidateToken"
+	IdentityService_RefreshToken_FullMethodName        = "/identity.IdentityService/RefreshToken"
+	IdentityService_GetUser_FullMethodName             = "/identity.IdentityService/GetUser"
+	IdentityService_ListUsers_FullMethodName           = "/identity.IdentityService/ListUsers"
+	IdentityService_UpdateUser_FullMethodName          = "/identity.IdentityService/UpdateUser"
+	IdentityService_DeleteUser_FullMethodName          = "/identity.IdentityService/DeleteUser"
+	IdentityService_BanUser_FullMethodName             = "/identity.IdentityService/BanUser"
+	IdentityService_UnbanUser_FullMethodName           = "/identity.IdentityService/UnbanUser"
+	IdentityService_PromoteToModerator_FullMethodName  = "/identity.IdentityService/PromoteToModerator"
+	IdentityService_DemoteFromModerator_FullMethodName = "/identity.IdentityService/DemoteFromModerator"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
@@ -42,6 +46,10 @@ type IdentityServiceClient interface {
 	ListUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	BanUser(ctx context.Context, in *BanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnbanUser(ctx context.Context, in *UnbanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	PromoteToModerator(ctx context.Context, in *PromoteToModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
 }
 
 type identityServiceClient struct {
@@ -132,6 +140,46 @@ func (c *identityServiceClient) DeleteUser(ctx context.Context, in *DeleteUserRe
 	return out, nil
 }
 
+func (c *identityServiceClient) BanUser(ctx context.Context, in *BanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, IdentityService_BanUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) UnbanUser(ctx context.Context, in *UnbanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, IdentityService_UnbanUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) PromoteToModerator(ctx context.Context, in *PromoteToModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserResponse)
+	err := c.cc.Invoke(ctx, IdentityService_PromoteToModerator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserResponse)
+	err := c.cc.Invoke(ctx, IdentityService_DemoteFromModerator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
@@ -144,6 +192,10 @@ type IdentityServiceServer interface {
 	ListUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UserResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
+	BanUser(context.Context, *BanUserRequest) (*emptypb.Empty, error)
+	UnbanUser(context.Context, *UnbanUserRequest) (*emptypb.Empty, error)
+	PromoteToModerator(context.Context, *PromoteToModeratorRequest) (*UserResponse, error)
+	DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -177,6 +229,18 @@ func (UnimplementedIdentityServiceServer) UpdateUser(context.Context, *UpdateUse
 }
 func (UnimplementedIdentityServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedIdentityServiceServer) BanUser(context.Context, *BanUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method BanUser not implemented")
+}
+func (UnimplementedIdentityServiceServer) UnbanUser(context.Context, *UnbanUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnbanUser not implemented")
+}
+func (UnimplementedIdentityServiceServer) PromoteToModerator(context.Context, *PromoteToModeratorRequest) (*UserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PromoteToModerator not implemented")
+}
+func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DemoteFromModerator not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -343,6 +407,78 @@ func _IdentityService_DeleteUser_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_BanUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BanUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).BanUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_BanUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).BanUser(ctx, req.(*BanUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_UnbanUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnbanUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).UnbanUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_UnbanUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).UnbanUser(ctx, req.(*UnbanUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_PromoteToModerator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PromoteToModeratorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).PromoteToModerator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_PromoteToModerator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).PromoteToModerator(ctx, req.(*PromoteToModeratorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_DemoteFromModerator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DemoteFromModeratorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).DemoteFromModerator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_DemoteFromModerator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).DemoteFromModerator(ctx, req.(*DemoteFromModeratorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -382,7 +518,23 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteUser",
 			Handler:    _IdentityService_DeleteUser_Handler,
 		},
+		{
+			MethodName: "BanUser",
+			Handler:    _IdentityService_BanUser_Handler,
+		},
+		{
+			MethodName: "UnbanUser",
+			Handler:    _IdentityService_UnbanUser_Handler,
+		},
+		{
+			MethodName: "PromoteToModerator",
+			Handler:    _IdentityService_PromoteToModerator_Handler,
+		},
+		{
+			MethodName: "DemoteFromModerator",
+			Handler:    _IdentityService_DemoteFromModerator_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "identity.proto",
+	Metadata: "proto/identity.proto",
 }

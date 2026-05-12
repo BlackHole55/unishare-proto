@@ -30,6 +30,10 @@ service IdentityService {
     rpc ListUsers (GetUsersRequest) returns (GetUsersResponse);
     rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
     rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+    rpc BanUser (BanUserRequest) returns (google.protobuf.Empty);
+    rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
+    rpc PromoteToModerator (PromoteToModeratorRequest) returns (UserResponse);
+    rpc DemoteFromModerator (DemoteFromModeratorRequest) returns (UserResponse);
 }
 
 message UserResponse {
@@ -100,4 +104,20 @@ message ValidateTokenResponse {
 
 message RefreshTokenRequest {
     string refresh_token = 1;
+}
+
+message BanUserRequest {
+    uint64 user_id = 1;
+}
+
+message UnbanUserRequest {
+    uint64 user_id = 1;
+}
+
+message PromoteToModeratorRequest {
+    uint64 user_id = 1;
+}
+
+message DemoteFromModeratorRequest {
+    uint64 user_id = 1;
 }
