@@ -37,7 +37,7 @@ service IdentityService {
 }
 
 message UserResponse {
-    uint64 id = 1;
+    string id = 1;
     string username = 2;
     string email = 3;
     UserRole role = 4;
@@ -64,7 +64,7 @@ message LoginRequest {
 }
 
 message UpdateUserRequest {
-    uint64 id = 1;
+    string id = 1;
     string username = 2;
     string email = 3;
     UserRole role = 4;
@@ -73,7 +73,7 @@ message UpdateUserRequest {
 }
 
 message GetUserRequest {
-    uint64 user_id = 1;
+    string user_id = 1;
 }
 
 message GetUsersRequest {
@@ -87,7 +87,7 @@ message GetUsersResponse {
 }
 
 message DeleteUserRequest {
-    uint64 user_id = 1;     
+    string user_id = 1;     
 }
 
 message ValidateTokenRequest {
@@ -95,7 +95,7 @@ message ValidateTokenRequest {
 }
 
 message ValidateTokenResponse {
-    uint64 user_id = 1;
+    string user_id = 1;
     bool is_valid = 2;
     UserRole role = 3;
     string email = 4;                      
@@ -107,17 +107,17 @@ message RefreshTokenRequest {
 }
 
 message BanUserRequest {
-    uint64 user_id = 1;
+    string user_id = 1;
 }
 
 message UnbanUserRequest {
-    uint64 user_id = 1;
+    string user_id = 1;
 }
 
 message PromoteToModeratorRequest {
-    uint64 user_id = 1;
+    string user_id = 1;
 }
 
 message DemoteFromModeratorRequest {
-    uint64 user_id = 1;
+    string user_id = 1;
 }
