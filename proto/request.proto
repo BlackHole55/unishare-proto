@@ -26,6 +26,9 @@ service RequestService {
   // List requests with optional filters and pagination.
   rpc ListRequests(ListRequestsRequest) returns (ListRequestsResponse);
 
+  // List all requests excluding archived ones.
+  rpc ListActiveRequests(ListActiveRequestsRequest) returns (ListActiveRequestsResponse);
+
   // Transition a request to APPROVED, REJECTED, or ARCHIVED.
   rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse);
 
@@ -81,6 +84,17 @@ message ListRequestsRequest {
 message ListRequestsResponse {
   repeated Request requests        = 1;
   string           next_page_token = 2;  // empty when no more pages
+  int32            total_count     = 3;
+}
+
+message ListActiveRequestsRequest {
+  int32  page_size   = 1;
+  string page_token  = 2;
+}
+
+message ListActiveRequestsResponse {
+  repeated Request requests = 1;
+  string           next_page_token = 2;
   int32            total_count     = 3;
 }
 

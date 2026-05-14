@@ -22,6 +22,7 @@ const (
 	RequestService_CreateRequest_FullMethodName       = "/request.RequestService/CreateRequest"
 	RequestService_GetRequest_FullMethodName          = "/request.RequestService/GetRequest"
 	RequestService_ListRequests_FullMethodName        = "/request.RequestService/ListRequests"
+	RequestService_ListActiveRequests_FullMethodName  = "/request.RequestService/ListActiveRequests"
 	RequestService_UpdateRequestStatus_FullMethodName = "/request.RequestService/UpdateRequestStatus"
 	RequestService_DeleteRequest_FullMethodName       = "/request.RequestService/DeleteRequest"
 )
@@ -38,6 +39,8 @@ type RequestServiceClient interface {
 	GetRequest(ctx context.Context, in *GetRequestRequest, opts ...grpc.CallOption) (*GetRequestResponse, error)
 	// List requests with optional filters and pagination.
 	ListRequests(ctx context.Context, in *ListRequestsRequest, opts ...grpc.CallOption) (*ListRequestsResponse, error)
+	// List all requests excluding archived ones.
+	ListActiveRequests(ctx context.Context, in *ListActiveRequestsRequest, opts ...grpc.CallOption) (*ListActiveRequestsResponse, error)
 	// Transition a request to APPROVED, REJECTED, or ARCHIVED.
 	UpdateRequestStatus(ctx context.Context, in *UpdateRequestStatusRequest, opts ...grpc.CallOption) (*UpdateRequestStatusResponse, error)
 	// Permanently delete a request record.
@@ -82,6 +85,16 @@ func (c *requestServiceClient) ListRequests(ctx context.Context, in *ListRequest
 	return out, nil
 }
 
+func (c *requestServiceClient) ListActiveRequests(ctx context.Context, in *ListActiveRequestsRequest, opts ...grpc.CallOption) (*ListActiveRequestsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListActiveRequestsResponse)
+	err := c.cc.Invoke(ctx, RequestService_ListActiveRequests_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *requestServiceClient) UpdateRequestStatus(ctx context.Context, in *UpdateRequestStatusRequest, opts ...grpc.CallOption) (*UpdateRequestStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateRequestStatusResponse)
@@ -114,6 +127,8 @@ type RequestServiceServer interface {
 	GetRequest(context.Context, *GetRequestRequest) (*GetRequestResponse, error)
 	// List requests with optional filters and pagination.
 	ListRequests(context.Context, *ListRequestsRequest) (*ListRequestsResponse, error)
+	// List all requests excluding archived ones.
+	ListActiveRequests(context.Context, *ListActiveRequestsRequest) (*ListActiveRequestsResponse, error)
 	// Transition a request to APPROVED, REJECTED, or ARCHIVED.
 	UpdateRequestStatus(context.Context, *UpdateRequestStatusRequest) (*UpdateRequestStatusResponse, error)
 	// Permanently delete a request record.
@@ -136,6 +151,9 @@ func (UnimplementedRequestServiceServer) GetRequest(context.Context, *GetRequest
 }
 func (UnimplementedRequestServiceServer) ListRequests(context.Context, *ListRequestsRequest) (*ListRequestsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRequests not implemented")
+}
+func (UnimplementedRequestServiceServer) ListActiveRequests(context.Context, *ListActiveRequestsRequest) (*ListActiveRequestsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListActiveRequests not implemented")
 }
 func (UnimplementedRequestServiceServer) UpdateRequestStatus(context.Context, *UpdateRequestStatusRequest) (*UpdateRequestStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateRequestStatus not implemented")
@@ -218,6 +236,24 @@ func _RequestService_ListRequests_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RequestService_ListActiveRequests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListActiveRequestsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).ListActiveRequests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_ListActiveRequests_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).ListActiveRequests(ctx, req.(*ListActiveRequestsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RequestService_UpdateRequestStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateRequestStatusRequest)
 	if err := dec(in); err != nil {
@@ -272,6 +308,10 @@ var RequestService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRequests",
 			Handler:    _RequestService_ListRequests_Handler,
+		},
+		{
+			MethodName: "ListActiveRequests",
+			Handler:    _RequestService_ListActiveRequests_Handler,
 		},
 		{
 			MethodName: "UpdateRequestStatus",
