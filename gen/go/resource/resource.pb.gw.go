@@ -140,7 +140,7 @@ var filter_ResourceService_ListActiveResources_0 = &utilities.DoubleArray{Encodi
 
 func request_ResourceService_ListActiveResources_0(ctx context.Context, marshaler runtime.Marshaler, client ResourceServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListResourcesRequest
+		protoReq ListActiveResourcesRequest
 		metadata runtime.ServerMetadata
 	)
 	if req.Body != nil {
@@ -158,7 +158,7 @@ func request_ResourceService_ListActiveResources_0(ctx context.Context, marshale
 
 func local_request_ResourceService_ListActiveResources_0(ctx context.Context, marshaler runtime.Marshaler, server ResourceServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListResourcesRequest
+		protoReq ListActiveResourcesRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := req.ParseForm(); err != nil {

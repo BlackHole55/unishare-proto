@@ -838,12 +838,12 @@ const file_resource_proto_rawDesc = "" +
 	"\bRESERVED\x10\x02\x12\f\n" +
 	"\bARCHIVED\x10\x03\x12\n" +
 	"\n" +
-	"\x06BANNED\x10\x042\xf9\x05\n" +
+	"\x06BANNED\x10\x042\x86\x06\n" +
 	"\x0fResourceService\x12j\n" +
 	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/resource\x12f\n" +
 	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/resource/{id}\x12j\n" +
-	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12w\n" +
-	"\x13ListActiveResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/resource/active\x12v\n" +
+	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12\x83\x01\n" +
+	"\x13ListActiveResources\x12$.resource.ListActiveResourcesRequest\x1a%.resource.ListActiveResourcesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/resource/active\x12v\n" +
 	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"'\x82\xd3\xe4\x93\x02!:\bresource\x1a\x15/api/v1/resource/{id}\x12h\n" +
 	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/resource/{id}\x12K\n" +
 	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
@@ -890,14 +890,14 @@ var file_resource_proto_depIdxs = []int32{
 	2,  // 7: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
 	3,  // 8: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
 	4,  // 9: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
-	4,  // 10: resource.ResourceService.ListActiveResources:input_type -> resource.ListResourcesRequest
+	6,  // 10: resource.ResourceService.ListActiveResources:input_type -> resource.ListActiveResourcesRequest
 	8,  // 11: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
 	9,  // 12: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
 	10, // 13: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
 	1,  // 14: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
 	1,  // 15: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
 	5,  // 16: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
-	5,  // 17: resource.ResourceService.ListActiveResources:output_type -> resource.ListResourcesResponse
+	7,  // 17: resource.ResourceService.ListActiveResources:output_type -> resource.ListActiveResourcesResponse
 	1,  // 18: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
 	14, // 19: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
 	11, // 20: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse

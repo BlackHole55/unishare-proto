@@ -42,7 +42,7 @@ type ResourceServiceClient interface {
 	// READ: List resources with filtering
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
 	// READ: List active resources
-	ListActiveResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
+	ListActiveResources(ctx context.Context, in *ListActiveResourcesRequest, opts ...grpc.CallOption) (*ListActiveResourcesResponse, error)
 	// UPDATE: Edit resource details
 	UpdateResource(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error)
 	// DELETE: Remove a resource
@@ -89,9 +89,9 @@ func (c *resourceServiceClient) ListResources(ctx context.Context, in *ListResou
 	return out, nil
 }
 
-func (c *resourceServiceClient) ListActiveResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error) {
+func (c *resourceServiceClient) ListActiveResources(ctx context.Context, in *ListActiveResourcesRequest, opts ...grpc.CallOption) (*ListActiveResourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListResourcesResponse)
+	out := new(ListActiveResourcesResponse)
 	err := c.cc.Invoke(ctx, ResourceService_ListActiveResources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -142,7 +142,7 @@ type ResourceServiceServer interface {
 	// READ: List resources with filtering
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
 	// READ: List active resources
-	ListActiveResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
+	ListActiveResources(context.Context, *ListActiveResourcesRequest) (*ListActiveResourcesResponse, error)
 	// UPDATE: Edit resource details
 	UpdateResource(context.Context, *UpdateResourceRequest) (*ResourceResponse, error)
 	// DELETE: Remove a resource
@@ -168,7 +168,7 @@ func (UnimplementedResourceServiceServer) GetResource(context.Context, *GetResou
 func (UnimplementedResourceServiceServer) ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListResources not implemented")
 }
-func (UnimplementedResourceServiceServer) ListActiveResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
+func (UnimplementedResourceServiceServer) ListActiveResources(context.Context, *ListActiveResourcesRequest) (*ListActiveResourcesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListActiveResources not implemented")
 }
 func (UnimplementedResourceServiceServer) UpdateResource(context.Context, *UpdateResourceRequest) (*ResourceResponse, error) {
@@ -256,7 +256,7 @@ func _ResourceService_ListResources_Handler(srv interface{}, ctx context.Context
 }
 
 func _ResourceService_ListActiveResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListResourcesRequest)
+	in := new(ListActiveResourcesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -268,7 +268,7 @@ func _ResourceService_ListActiveResources_Handler(srv interface{}, ctx context.C
 		FullMethod: ResourceService_ListActiveResources_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ResourceServiceServer).ListActiveResources(ctx, req.(*ListResourcesRequest))
+		return srv.(ResourceServiceServer).ListActiveResources(ctx, req.(*ListActiveResourcesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

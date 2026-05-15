@@ -42,7 +42,7 @@ service ResourceService {
   };
 
   // READ: List active resources 
-  rpc ListActiveResources (ListResourcesRequest) returns (ListResourcesResponse) {
+  rpc ListActiveResources (ListActiveResourcesRequest) returns (ListActiveResourcesResponse) {
     option (google.api.http) = {
       get: "/api/v1/resource/active"
     };
