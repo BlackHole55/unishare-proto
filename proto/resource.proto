@@ -23,6 +23,7 @@ service ResourceService {
   rpc CreateResource (CreateResourceRequest) returns (ResourceResponse) {
     option (google.api.http) = {
       post: "/api/v1/resource"
+      body: "*"
     };
   };
 
@@ -44,6 +45,7 @@ service ResourceService {
   rpc UpdateResource (UpdateResourceRequest) returns (ResourceResponse) {
     option (google.api.http) = {
       put: "/api/v1/resource/{id}"
+      body: "*"
     };
   };
 
