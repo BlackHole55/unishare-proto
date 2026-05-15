@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.1
-// source: proto/identity.proto
+// source: identity.proto
 
 package identity
 
@@ -22,8 +22,6 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	IdentityService_Register_FullMethodName            = "/identity.IdentityService/Register"
 	IdentityService_Login_FullMethodName               = "/identity.IdentityService/Login"
-	IdentityService_ValidateToken_FullMethodName       = "/identity.IdentityService/ValidateToken"
-	IdentityService_RefreshToken_FullMethodName        = "/identity.IdentityService/RefreshToken"
 	IdentityService_GetUser_FullMethodName             = "/identity.IdentityService/GetUser"
 	IdentityService_ListUsers_FullMethodName           = "/identity.IdentityService/ListUsers"
 	IdentityService_UpdateUser_FullMethodName          = "/identity.IdentityService/UpdateUser"
@@ -38,20 +36,31 @@ const (
 // IdentityServiceClient is the client API for IdentityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Identity Service
 type IdentityServiceClient interface {
+	// AUTH: Register a new user
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// AUTH: Log in user
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
-	ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error)
-	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// READ: Get a single user by ID
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	// READ: List users with pagination
 	ListUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
+	// UPDATE: Update user profile details
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	// DELETE: Remove a user account
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ADMIN: Ban a user
 	BanUser(ctx context.Context, in *BanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ADMIN: Unban a user
 	UnbanUser(ctx context.Context, in *UnbanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ADMIN: Promote user to moderator
 	PromoteToModerator(ctx context.Context, in *PromoteToModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	// ADMIN: Demote user from moderator role
 	DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
-	CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponce, error)
+	// INTERNAL: Check if user is currently banned
+	CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponse, error)
 }
 
 type identityServiceClient struct {
@@ -76,26 +85,6 @@ func (c *identityServiceClient) Login(ctx context.Context, in *LoginRequest, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, IdentityService_Login_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *identityServiceClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ValidateTokenResponse)
-	err := c.cc.Invoke(ctx, IdentityService_ValidateToken_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *identityServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthResponse)
-	err := c.cc.Invoke(ctx, IdentityService_RefreshToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -182,9 +171,9 @@ func (c *identityServiceClient) DemoteFromModerator(ctx context.Context, in *Dem
 	return out, nil
 }
 
-func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponce, error) {
+func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CheckUserBannedResponce)
+	out := new(CheckUserBannedResponse)
 	err := c.cc.Invoke(ctx, IdentityService_CheckUserBanned_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -195,20 +184,31 @@ func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUs
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
+//
+// Identity Service
 type IdentityServiceServer interface {
+	// AUTH: Register a new user
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
+	// AUTH: Log in user
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
-	ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error)
-	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	// READ: Get a single user by ID
 	GetUser(context.Context, *GetUserRequest) (*UserResponse, error)
+	// READ: List users with pagination
 	ListUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error)
+	// UPDATE: Update user profile details
 	UpdateUser(context.Context, *UpdateUserRequest) (*UserResponse, error)
+	// DELETE: Remove a user account
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
+	// ADMIN: Ban a user
 	BanUser(context.Context, *BanUserRequest) (*emptypb.Empty, error)
+	// ADMIN: Unban a user
 	UnbanUser(context.Context, *UnbanUserRequest) (*emptypb.Empty, error)
+	// ADMIN: Promote user to moderator
 	PromoteToModerator(context.Context, *PromoteToModeratorRequest) (*UserResponse, error)
+	// ADMIN: Demote user from moderator role
 	DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error)
-	CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponce, error)
+	// INTERNAL: Check if user is currently banned
+	CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -224,12 +224,6 @@ func (UnimplementedIdentityServiceServer) Register(context.Context, *RegisterReq
 }
 func (UnimplementedIdentityServiceServer) Login(context.Context, *LoginRequest) (*AuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedIdentityServiceServer) ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ValidateToken not implemented")
-}
-func (UnimplementedIdentityServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedIdentityServiceServer) GetUser(context.Context, *GetUserRequest) (*UserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUser not implemented")
@@ -255,7 +249,7 @@ func (UnimplementedIdentityServiceServer) PromoteToModerator(context.Context, *P
 func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DemoteFromModerator not implemented")
 }
-func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponce, error) {
+func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserBanned not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
@@ -311,42 +305,6 @@ func _IdentityService_Login_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IdentityServiceServer).Login(ctx, req.(*LoginRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IdentityService_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ValidateTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IdentityServiceServer).ValidateToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IdentityService_ValidateToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).ValidateToken(ctx, req.(*ValidateTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IdentityService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RefreshTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IdentityServiceServer).RefreshToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IdentityService_RefreshToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -529,14 +487,6 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_Login_Handler,
 		},
 		{
-			MethodName: "ValidateToken",
-			Handler:    _IdentityService_ValidateToken_Handler,
-		},
-		{
-			MethodName: "RefreshToken",
-			Handler:    _IdentityService_RefreshToken_Handler,
-		},
-		{
 			MethodName: "GetUser",
 			Handler:    _IdentityService_GetUser_Handler,
 		},
@@ -574,5 +524,5 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/identity.proto",
+	Metadata: "identity.proto",
 }
