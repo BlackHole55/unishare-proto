@@ -335,7 +335,7 @@ func RegisterResourceServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/resource.ResourceService/ListResources", runtime.WithHTTPPathPattern("/api/v1/resource"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/resource.ResourceService/ListResources", runtime.WithHTTPPathPattern("/api/v1/resources"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -355,7 +355,7 @@ func RegisterResourceServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/resource.ResourceService/ListActiveResources", runtime.WithHTTPPathPattern("/api/v1/resource/active"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/resource.ResourceService/ListActiveResources", runtime.WithHTTPPathPattern("/api/v1/resources/active"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -487,7 +487,7 @@ func RegisterResourceServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/resource.ResourceService/ListResources", runtime.WithHTTPPathPattern("/api/v1/resource"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/resource.ResourceService/ListResources", runtime.WithHTTPPathPattern("/api/v1/resources"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -504,7 +504,7 @@ func RegisterResourceServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/resource.ResourceService/ListActiveResources", runtime.WithHTTPPathPattern("/api/v1/resource/active"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/resource.ResourceService/ListActiveResources", runtime.WithHTTPPathPattern("/api/v1/resources/active"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -557,8 +557,8 @@ func RegisterResourceServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 var (
 	pattern_ResourceService_CreateResource_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "resource"}, ""))
 	pattern_ResourceService_GetResource_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "resource", "id"}, ""))
-	pattern_ResourceService_ListResources_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "resource"}, ""))
-	pattern_ResourceService_ListActiveResources_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "resource", "active"}, ""))
+	pattern_ResourceService_ListResources_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "resources"}, ""))
+	pattern_ResourceService_ListActiveResources_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "resources", "active"}, ""))
 	pattern_ResourceService_UpdateResource_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "resource", "id"}, ""))
 	pattern_ResourceService_DeleteResource_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "resource", "id"}, ""))
 )

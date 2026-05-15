@@ -37,14 +37,14 @@ service ResourceService {
   // READ: List resources with filtering 
   rpc ListResources (ListResourcesRequest) returns (ListResourcesResponse) {
     option (google.api.http) = {
-      get: "/api/v1/resource"
+      get: "/api/v1/resources"
     };
   };
 
   // READ: List active resources 
   rpc ListActiveResources (ListActiveResourcesRequest) returns (ListActiveResourcesResponse) {
     option (google.api.http) = {
-      get: "/api/v1/resource/active"
+      get: "/api/v1/resources/active"
     };
   }
 
