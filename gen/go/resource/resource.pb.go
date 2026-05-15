@@ -718,12 +718,12 @@ const file_resource_proto_rawDesc = "" +
 	"\bRESERVED\x10\x02\x12\f\n" +
 	"\bARCHIVED\x10\x03\x12\n" +
 	"\n" +
-	"\x06BANNED\x10\x042\xf6\x04\n" +
+	"\x06BANNED\x10\x042\x80\x05\n" +
 	"\x0fResourceService\x12j\n" +
 	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/resource\x12f\n" +
 	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/resource/{id}\x12j\n" +
-	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12l\n" +
-	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x1a\x15/api/v1/resource/{id}\x12h\n" +
+	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12v\n" +
+	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"'\x82\xd3\xe4\x93\x02!:\bresource\x1a\x15/api/v1/resource/{id}\x12h\n" +
 	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/resource/{id}\x12K\n" +
 	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
 

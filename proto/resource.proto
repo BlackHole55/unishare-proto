@@ -45,7 +45,7 @@ service ResourceService {
   rpc UpdateResource (UpdateResourceRequest) returns (ResourceResponse) {
     option (google.api.http) = {
       put: "/api/v1/resource/{id}"
-      body: "*"
+      body: "resource"
     };
   };
 
