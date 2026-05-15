@@ -4,9 +4,10 @@
 // 	protoc        v7.34.1
 // source: resource.proto
 
-package unishare_proto
+package resource
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -663,7 +664,7 @@ var File_resource_proto protoreflect.FileDescriptor
 
 const file_resource_proto_rawDesc = "" +
 	"\n" +
-	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\"\xd8\x02\n" +
+	"\x0eresource.proto\x12\bresource\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\"\xd8\x02\n" +
 	"\x10ResourceResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\tR\aownerId\x12\x14\n" +
@@ -717,14 +718,14 @@ const file_resource_proto_rawDesc = "" +
 	"\bRESERVED\x10\x02\x12\f\n" +
 	"\bARCHIVED\x10\x03\x12\n" +
 	"\n" +
-	"\x06BANNED\x10\x042\xe2\x03\n" +
-	"\x0fResourceService\x12M\n" +
-	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\x12G\n" +
-	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\x12P\n" +
-	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\x12M\n" +
-	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\x12I\n" +
-	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB'Z%github.com/BlackHole55/unishare-protob\x06proto3"
+	"\x06BANNED\x10\x042\xf3\x04\n" +
+	"\x0fResourceService\x12g\n" +
+	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x18\x82\xd3\xe4\x93\x02\x12\"\x10/api/v1/resource\x12f\n" +
+	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/resource/{id}\x12j\n" +
+	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12l\n" +
+	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x1a\x15/api/v1/resource/{id}\x12h\n" +
+	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/resource/{id}\x12K\n" +
+	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
 
 var (
 	file_resource_proto_rawDescOnce sync.Once

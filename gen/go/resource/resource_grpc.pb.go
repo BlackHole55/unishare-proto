@@ -4,7 +4,7 @@
 // - protoc             v7.34.1
 // source: resource.proto
 
-package unishare_proto
+package resource
 
 import (
 	context "context"
