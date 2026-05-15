@@ -1002,27 +1002,27 @@ func (x *DemoteFromModeratorRequest) GetUserId() string {
 	return ""
 }
 
-type CheckUserBannnedRequest struct {
+type CheckUserBannedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CheckUserBannnedRequest) Reset() {
-	*x = CheckUserBannnedRequest{}
+func (x *CheckUserBannedRequest) Reset() {
+	*x = CheckUserBannedRequest{}
 	mi := &file_proto_identity_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CheckUserBannnedRequest) String() string {
+func (x *CheckUserBannedRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CheckUserBannnedRequest) ProtoMessage() {}
+func (*CheckUserBannedRequest) ProtoMessage() {}
 
-func (x *CheckUserBannnedRequest) ProtoReflect() protoreflect.Message {
+func (x *CheckUserBannedRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_identity_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1034,39 +1034,39 @@ func (x *CheckUserBannnedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CheckUserBannnedRequest.ProtoReflect.Descriptor instead.
-func (*CheckUserBannnedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CheckUserBannedRequest.ProtoReflect.Descriptor instead.
+func (*CheckUserBannedRequest) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *CheckUserBannnedRequest) GetUserId() string {
+func (x *CheckUserBannedRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-type CheckUserBannnedResponce struct {
+type CheckUserBannedResponce struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Banned        bool                   `protobuf:"varint,1,opt,name=banned,proto3" json:"banned,omitempty"`
+	IsActive      bool                   `protobuf:"varint,1,opt,name=isActive,proto3" json:"isActive,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CheckUserBannnedResponce) Reset() {
-	*x = CheckUserBannnedResponce{}
+func (x *CheckUserBannedResponce) Reset() {
+	*x = CheckUserBannedResponce{}
 	mi := &file_proto_identity_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CheckUserBannnedResponce) String() string {
+func (x *CheckUserBannedResponce) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CheckUserBannnedResponce) ProtoMessage() {}
+func (*CheckUserBannedResponce) ProtoMessage() {}
 
-func (x *CheckUserBannnedResponce) ProtoReflect() protoreflect.Message {
+func (x *CheckUserBannedResponce) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_identity_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1078,14 +1078,14 @@ func (x *CheckUserBannnedResponce) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CheckUserBannnedResponce.ProtoReflect.Descriptor instead.
-func (*CheckUserBannnedResponce) Descriptor() ([]byte, []int) {
+// Deprecated: Use CheckUserBannedResponce.ProtoReflect.Descriptor instead.
+func (*CheckUserBannedResponce) Descriptor() ([]byte, []int) {
 	return file_proto_identity_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *CheckUserBannnedResponce) GetBanned() bool {
+func (x *CheckUserBannedResponce) GetIsActive() bool {
 	if x != nil {
-		return x.Banned
+		return x.IsActive
 	}
 	return false
 }
@@ -1153,11 +1153,11 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\x19PromoteToModeratorRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"5\n" +
 	"\x1aDemoteFromModeratorRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"2\n" +
-	"\x17CheckUserBannnedRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"2\n" +
-	"\x18CheckUserBannnedResponce\x12\x16\n" +
-	"\x06banned\x18\x01 \x01(\bR\x06banned*Y\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"1\n" +
+	"\x16CheckUserBannedRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"5\n" +
+	"\x17CheckUserBannedResponce\x12\x1a\n" +
+	"\bisActive\x18\x01 \x01(\bR\bisActive*Y\n" +
 	"\n" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
@@ -1167,7 +1167,7 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\tROLE_USER\x10\x00\x12\x12\n" +
 	"\x0eROLE_MODERATOR\x10\x01\x12\x0e\n" +
 	"\n" +
-	"ROLE_ADMIN\x10\x022\xa9\a\n" +
+	"ROLE_ADMIN\x10\x022\xa7\a\n" +
 	"\x0fIdentityService\x12=\n" +
 	"\bRegister\x12\x19.identity.RegisterRequest\x1a\x16.identity.AuthResponse\x127\n" +
 	"\x05Login\x12\x16.identity.LoginRequest\x1a\x16.identity.AuthResponse\x12P\n" +
@@ -1182,8 +1182,8 @@ const file_proto_identity_proto_rawDesc = "" +
 	"\aBanUser\x12\x18.identity.BanUserRequest\x1a\x16.google.protobuf.Empty\x12?\n" +
 	"\tUnbanUser\x12\x1a.identity.UnbanUserRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
 	"\x12PromoteToModerator\x12#.identity.PromoteToModeratorRequest\x1a\x16.identity.UserResponse\x12S\n" +
-	"\x13DemoteFromModerator\x12$.identity.DemoteFromModeratorRequest\x1a\x16.identity.UserResponse\x12X\n" +
-	"\x0fCheckUserBanned\x12!.identity.CheckUserBannnedRequest\x1a\".identity.CheckUserBannnedResponceB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
+	"\x13DemoteFromModerator\x12$.identity.DemoteFromModeratorRequest\x1a\x16.identity.UserResponse\x12V\n" +
+	"\x0fCheckUserBanned\x12 .identity.CheckUserBannedRequest\x1a!.identity.CheckUserBannedResponceB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
 
 var (
 	file_proto_identity_proto_rawDescOnce sync.Once
@@ -1218,8 +1218,8 @@ var file_proto_identity_proto_goTypes = []any{
 	(*UnbanUserRequest)(nil),           // 15: identity.UnbanUserRequest
 	(*PromoteToModeratorRequest)(nil),  // 16: identity.PromoteToModeratorRequest
 	(*DemoteFromModeratorRequest)(nil), // 17: identity.DemoteFromModeratorRequest
-	(*CheckUserBannnedRequest)(nil),    // 18: identity.CheckUserBannnedRequest
-	(*CheckUserBannnedResponce)(nil),   // 19: identity.CheckUserBannnedResponce
+	(*CheckUserBannedRequest)(nil),     // 18: identity.CheckUserBannedRequest
+	(*CheckUserBannedResponce)(nil),    // 19: identity.CheckUserBannedResponce
 	(*timestamppb.Timestamp)(nil),      // 20: google.protobuf.Timestamp
 	(*fieldmaskpb.FieldMask)(nil),      // 21: google.protobuf.FieldMask
 	(*emptypb.Empty)(nil),              // 22: google.protobuf.Empty
@@ -1248,7 +1248,7 @@ var file_proto_identity_proto_depIdxs = []int32{
 	15, // 20: identity.IdentityService.UnbanUser:input_type -> identity.UnbanUserRequest
 	16, // 21: identity.IdentityService.PromoteToModerator:input_type -> identity.PromoteToModeratorRequest
 	17, // 22: identity.IdentityService.DemoteFromModerator:input_type -> identity.DemoteFromModeratorRequest
-	18, // 23: identity.IdentityService.CheckUserBanned:input_type -> identity.CheckUserBannnedRequest
+	18, // 23: identity.IdentityService.CheckUserBanned:input_type -> identity.CheckUserBannedRequest
 	3,  // 24: identity.IdentityService.Register:output_type -> identity.AuthResponse
 	3,  // 25: identity.IdentityService.Login:output_type -> identity.AuthResponse
 	12, // 26: identity.IdentityService.ValidateToken:output_type -> identity.ValidateTokenResponse
@@ -1261,7 +1261,7 @@ var file_proto_identity_proto_depIdxs = []int32{
 	22, // 33: identity.IdentityService.UnbanUser:output_type -> google.protobuf.Empty
 	2,  // 34: identity.IdentityService.PromoteToModerator:output_type -> identity.UserResponse
 	2,  // 35: identity.IdentityService.DemoteFromModerator:output_type -> identity.UserResponse
-	19, // 36: identity.IdentityService.CheckUserBanned:output_type -> identity.CheckUserBannnedResponce
+	19, // 36: identity.IdentityService.CheckUserBanned:output_type -> identity.CheckUserBannedResponce
 	24, // [24:37] is the sub-list for method output_type
 	11, // [11:24] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name

@@ -51,7 +51,7 @@ type IdentityServiceClient interface {
 	UnbanUser(ctx context.Context, in *UnbanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PromoteToModerator(ctx context.Context, in *PromoteToModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
-	CheckUserBanned(ctx context.Context, in *CheckUserBannnedRequest, opts ...grpc.CallOption) (*CheckUserBannnedResponce, error)
+	CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponce, error)
 }
 
 type identityServiceClient struct {
@@ -182,9 +182,9 @@ func (c *identityServiceClient) DemoteFromModerator(ctx context.Context, in *Dem
 	return out, nil
 }
 
-func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUserBannnedRequest, opts ...grpc.CallOption) (*CheckUserBannnedResponce, error) {
+func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponce, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CheckUserBannnedResponce)
+	out := new(CheckUserBannedResponce)
 	err := c.cc.Invoke(ctx, IdentityService_CheckUserBanned_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -208,7 +208,7 @@ type IdentityServiceServer interface {
 	UnbanUser(context.Context, *UnbanUserRequest) (*emptypb.Empty, error)
 	PromoteToModerator(context.Context, *PromoteToModeratorRequest) (*UserResponse, error)
 	DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error)
-	CheckUserBanned(context.Context, *CheckUserBannnedRequest) (*CheckUserBannnedResponce, error)
+	CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponce, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -255,7 +255,7 @@ func (UnimplementedIdentityServiceServer) PromoteToModerator(context.Context, *P
 func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DemoteFromModerator not implemented")
 }
-func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannnedRequest) (*CheckUserBannnedResponce, error) {
+func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponce, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserBanned not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
@@ -496,7 +496,7 @@ func _IdentityService_DemoteFromModerator_Handler(srv interface{}, ctx context.C
 }
 
 func _IdentityService_CheckUserBanned_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckUserBannnedRequest)
+	in := new(CheckUserBannedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -508,7 +508,7 @@ func _IdentityService_CheckUserBanned_Handler(srv interface{}, ctx context.Conte
 		FullMethod: IdentityService_CheckUserBanned_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).CheckUserBanned(ctx, req.(*CheckUserBannnedRequest))
+		return srv.(IdentityServiceServer).CheckUserBanned(ctx, req.(*CheckUserBannedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
