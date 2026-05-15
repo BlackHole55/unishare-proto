@@ -100,12 +100,8 @@ service IdentityService {
     };
   }
 
-  // INTERNAL: Check if user is currently banned
-  rpc CheckUserBanned (CheckUserBannedRequest) returns (CheckUserBannedResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/users/{user_id}/banned-status"
-    };
-  }
+  // INTERNAL: Check if user is currently banned  
+  rpc CheckUserBanned (CheckUserBannedRequest) returns (CheckUserBannedResponse); 
 }
 
 message UserResponse {

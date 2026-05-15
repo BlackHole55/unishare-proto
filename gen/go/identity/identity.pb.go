@@ -993,7 +993,7 @@ const file_identity_proto_rawDesc = "" +
 	"\tROLE_USER\x10\x00\x12\x12\n" +
 	"\x0eROLE_MODERATOR\x10\x01\x12\x0e\n" +
 	"\n" +
-	"ROLE_ADMIN\x10\x022\xa0\t\n" +
+	"ROLE_ADMIN\x10\x022\xf0\b\n" +
 	"\x0fIdentityService\x12_\n" +
 	"\bRegister\x12\x19.identity.RegisterRequest\x1a\x16.identity.AuthResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/auth/register\x12V\n" +
 	"\x05Login\x12\x16.identity.LoginRequest\x1a\x16.identity.AuthResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/auth/login\x12\\\n" +
@@ -1006,8 +1006,8 @@ const file_identity_proto_rawDesc = "" +
 	"\aBanUser\x12\x18.identity.BanUserRequest\x1a\x16.google.protobuf.Empty\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/v1/users/{user_id}/ban\x12i\n" +
 	"\tUnbanUser\x12\x1a.identity.UnbanUserRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/v1/users/{user_id}/unban\x12}\n" +
 	"\x12PromoteToModerator\x12#.identity.PromoteToModeratorRequest\x1a\x16.identity.UserResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/v1/users/{user_id}/promote\x12~\n" +
-	"\x13DemoteFromModerator\x12$.identity.DemoteFromModeratorRequest\x1a\x16.identity.UserResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/v1/users/{user_id}/demote\x12\x85\x01\n" +
-	"\x0fCheckUserBanned\x12 .identity.CheckUserBannedRequest\x1a!.identity.CheckUserBannedResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/users/{user_id}/banned-statusB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
+	"\x13DemoteFromModerator\x12$.identity.DemoteFromModeratorRequest\x1a\x16.identity.UserResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/v1/users/{user_id}/demote\x12V\n" +
+	"\x0fCheckUserBanned\x12 .identity.CheckUserBannedRequest\x1a!.identity.CheckUserBannedResponseB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
 
 var (
 	file_identity_proto_rawDescOnce sync.Once
