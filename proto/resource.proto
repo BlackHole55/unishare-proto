@@ -41,6 +41,13 @@ service ResourceService {
     };
   };
 
+  // READ: List active resources 
+  rpc ListActiveResources (ListResourcesRequest) returns (ListResourcesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/resource/active"
+    };
+  }
+
   // UPDATE: Edit resource details
   rpc UpdateResource (UpdateResourceRequest) returns (ResourceResponse) {
     option (google.api.http) = {
@@ -91,6 +98,17 @@ message ListResourcesRequest {
 }
 
 message ListResourcesResponse {
+  repeated ResourceResponse resources = 1;
+  int32 total_count = 2;
+}
+
+message ListActiveResourcesRequest {
+  string category = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message ListActiveResourcesResponse {
   repeated ResourceResponse resources = 1;
   int32 total_count = 2;
 }

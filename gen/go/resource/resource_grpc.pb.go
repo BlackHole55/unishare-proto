@@ -20,12 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ResourceService_CreateResource_FullMethodName     = "/resource.ResourceService/CreateResource"
-	ResourceService_GetResource_FullMethodName        = "/resource.ResourceService/GetResource"
-	ResourceService_ListResources_FullMethodName      = "/resource.ResourceService/ListResources"
-	ResourceService_UpdateResource_FullMethodName     = "/resource.ResourceService/UpdateResource"
-	ResourceService_DeleteResource_FullMethodName     = "/resource.ResourceService/DeleteResource"
-	ResourceService_ValidateForRequest_FullMethodName = "/resource.ResourceService/ValidateForRequest"
+	ResourceService_CreateResource_FullMethodName      = "/resource.ResourceService/CreateResource"
+	ResourceService_GetResource_FullMethodName         = "/resource.ResourceService/GetResource"
+	ResourceService_ListResources_FullMethodName       = "/resource.ResourceService/ListResources"
+	ResourceService_ListActiveResources_FullMethodName = "/resource.ResourceService/ListActiveResources"
+	ResourceService_UpdateResource_FullMethodName      = "/resource.ResourceService/UpdateResource"
+	ResourceService_DeleteResource_FullMethodName      = "/resource.ResourceService/DeleteResource"
+	ResourceService_ValidateForRequest_FullMethodName  = "/resource.ResourceService/ValidateForRequest"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -40,6 +41,8 @@ type ResourceServiceClient interface {
 	GetResource(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error)
 	// READ: List resources with filtering
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
+	// READ: List active resources
+	ListActiveResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
 	// UPDATE: Edit resource details
 	UpdateResource(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error)
 	// DELETE: Remove a resource
@@ -80,6 +83,16 @@ func (c *resourceServiceClient) ListResources(ctx context.Context, in *ListResou
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListResourcesResponse)
 	err := c.cc.Invoke(ctx, ResourceService_ListResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) ListActiveResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResourcesResponse)
+	err := c.cc.Invoke(ctx, ResourceService_ListActiveResources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,6 +141,8 @@ type ResourceServiceServer interface {
 	GetResource(context.Context, *GetResourceRequest) (*ResourceResponse, error)
 	// READ: List resources with filtering
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
+	// READ: List active resources
+	ListActiveResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
 	// UPDATE: Edit resource details
 	UpdateResource(context.Context, *UpdateResourceRequest) (*ResourceResponse, error)
 	// DELETE: Remove a resource
@@ -152,6 +167,9 @@ func (UnimplementedResourceServiceServer) GetResource(context.Context, *GetResou
 }
 func (UnimplementedResourceServiceServer) ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListResources not implemented")
+}
+func (UnimplementedResourceServiceServer) ListActiveResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListActiveResources not implemented")
 }
 func (UnimplementedResourceServiceServer) UpdateResource(context.Context, *UpdateResourceRequest) (*ResourceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateResource not implemented")
@@ -237,6 +255,24 @@ func _ResourceService_ListResources_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_ListActiveResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).ListActiveResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_ListActiveResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).ListActiveResources(ctx, req.(*ListResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ResourceService_UpdateResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateResourceRequest)
 	if err := dec(in); err != nil {
@@ -309,6 +345,10 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListResources",
 			Handler:    _ResourceService_ListResources_Handler,
+		},
+		{
+			MethodName: "ListActiveResources",
+			Handler:    _ResourceService_ListActiveResources_Handler,
 		},
 		{
 			MethodName: "UpdateResource",
