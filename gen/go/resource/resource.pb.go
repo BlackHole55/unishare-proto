@@ -420,6 +420,118 @@ func (x *ListResourcesResponse) GetTotalCount() int32 {
 	return 0
 }
 
+type ListActiveResourcesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        int32                  `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListActiveResourcesRequest) Reset() {
+	*x = ListActiveResourcesRequest{}
+	mi := &file_resource_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListActiveResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListActiveResourcesRequest) ProtoMessage() {}
+
+func (x *ListActiveResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListActiveResourcesRequest.ProtoReflect.Descriptor instead.
+func (*ListActiveResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListActiveResourcesRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *ListActiveResourcesRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListActiveResourcesRequest) GetOffset() int32 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+type ListActiveResourcesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resources     []*ResourceResponse    `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListActiveResourcesResponse) Reset() {
+	*x = ListActiveResourcesResponse{}
+	mi := &file_resource_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListActiveResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListActiveResourcesResponse) ProtoMessage() {}
+
+func (x *ListActiveResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListActiveResourcesResponse.ProtoReflect.Descriptor instead.
+func (*ListActiveResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListActiveResourcesResponse) GetResources() []*ResourceResponse {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+func (x *ListActiveResourcesResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
 type UpdateResourceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -433,7 +545,7 @@ type UpdateResourceRequest struct {
 
 func (x *UpdateResourceRequest) Reset() {
 	*x = UpdateResourceRequest{}
-	mi := &file_resource_proto_msgTypes[5]
+	mi := &file_resource_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -445,7 +557,7 @@ func (x *UpdateResourceRequest) String() string {
 func (*UpdateResourceRequest) ProtoMessage() {}
 
 func (x *UpdateResourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_resource_proto_msgTypes[5]
+	mi := &file_resource_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -458,7 +570,7 @@ func (x *UpdateResourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateResourceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateResourceRequest) Descriptor() ([]byte, []int) {
-	return file_resource_proto_rawDescGZIP(), []int{5}
+	return file_resource_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateResourceRequest) GetId() string {
@@ -507,7 +619,7 @@ type DeleteResourceRequest struct {
 
 func (x *DeleteResourceRequest) Reset() {
 	*x = DeleteResourceRequest{}
-	mi := &file_resource_proto_msgTypes[6]
+	mi := &file_resource_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -519,7 +631,7 @@ func (x *DeleteResourceRequest) String() string {
 func (*DeleteResourceRequest) ProtoMessage() {}
 
 func (x *DeleteResourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_resource_proto_msgTypes[6]
+	mi := &file_resource_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +644,7 @@ func (x *DeleteResourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteResourceRequest.ProtoReflect.Descriptor instead.
 func (*DeleteResourceRequest) Descriptor() ([]byte, []int) {
-	return file_resource_proto_rawDescGZIP(), []int{6}
+	return file_resource_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteResourceRequest) GetId() string {
@@ -565,7 +677,7 @@ type ValidateRequest struct {
 
 func (x *ValidateRequest) Reset() {
 	*x = ValidateRequest{}
-	mi := &file_resource_proto_msgTypes[7]
+	mi := &file_resource_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -577,7 +689,7 @@ func (x *ValidateRequest) String() string {
 func (*ValidateRequest) ProtoMessage() {}
 
 func (x *ValidateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_resource_proto_msgTypes[7]
+	mi := &file_resource_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -590,7 +702,7 @@ func (x *ValidateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateRequest.ProtoReflect.Descriptor instead.
 func (*ValidateRequest) Descriptor() ([]byte, []int) {
-	return file_resource_proto_rawDescGZIP(), []int{7}
+	return file_resource_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ValidateRequest) GetId() string {
@@ -611,7 +723,7 @@ type ValidateResponse struct {
 
 func (x *ValidateResponse) Reset() {
 	*x = ValidateResponse{}
-	mi := &file_resource_proto_msgTypes[8]
+	mi := &file_resource_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -623,7 +735,7 @@ func (x *ValidateResponse) String() string {
 func (*ValidateResponse) ProtoMessage() {}
 
 func (x *ValidateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_resource_proto_msgTypes[8]
+	mi := &file_resource_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -636,7 +748,7 @@ func (x *ValidateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateResponse.ProtoReflect.Descriptor instead.
 func (*ValidateResponse) Descriptor() ([]byte, []int) {
-	return file_resource_proto_rawDescGZIP(), []int{8}
+	return file_resource_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ValidateResponse) GetIsAvailable() bool {
@@ -694,6 +806,14 @@ const file_resource_proto_rawDesc = "" +
 	"\x15ListResourcesResponse\x128\n" +
 	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\"f\n" +
+	"\x1aListActiveResourcesRequest\x12\x1a\n" +
+	"\bcategory\x18\x01 \x01(\tR\bcategory\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x03 \x01(\x05R\x06offset\"x\n" +
+	"\x1bListActiveResourcesResponse\x128\n" +
+	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\"\xe6\x01\n" +
 	"\x15UpdateResourceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
@@ -718,12 +838,13 @@ const file_resource_proto_rawDesc = "" +
 	"\bRESERVED\x10\x02\x12\f\n" +
 	"\bARCHIVED\x10\x03\x12\n" +
 	"\n" +
-	"\x06BANNED\x10\x042\xf3\x04\n" +
-	"\x0fResourceService\x12g\n" +
-	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x18\x82\xd3\xe4\x93\x02\x12\"\x10/api/v1/resource\x12f\n" +
+	"\x06BANNED\x10\x042\xf9\x05\n" +
+	"\x0fResourceService\x12j\n" +
+	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/resource\x12f\n" +
 	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/resource/{id}\x12j\n" +
-	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12l\n" +
-	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x1a\x15/api/v1/resource/{id}\x12h\n" +
+	"\rListResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/resource\x12w\n" +
+	"\x13ListActiveResources\x12\x1e.resource.ListResourcesRequest\x1a\x1f.resource.ListResourcesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/resource/active\x12v\n" +
+	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"'\x82\xd3\xe4\x93\x02!:\bresource\x1a\x15/api/v1/resource/{id}\x12h\n" +
 	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/resource/{id}\x12K\n" +
 	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
 
@@ -740,46 +861,51 @@ func file_resource_proto_rawDescGZIP() []byte {
 }
 
 var file_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_resource_proto_goTypes = []any{
-	(ResourceStatus)(0),           // 0: resource.ResourceStatus
-	(*ResourceResponse)(nil),      // 1: resource.ResourceResponse
-	(*CreateResourceRequest)(nil), // 2: resource.CreateResourceRequest
-	(*GetResourceRequest)(nil),    // 3: resource.GetResourceRequest
-	(*ListResourcesRequest)(nil),  // 4: resource.ListResourcesRequest
-	(*ListResourcesResponse)(nil), // 5: resource.ListResourcesResponse
-	(*UpdateResourceRequest)(nil), // 6: resource.UpdateResourceRequest
-	(*DeleteResourceRequest)(nil), // 7: resource.DeleteResourceRequest
-	(*ValidateRequest)(nil),       // 8: resource.ValidateRequest
-	(*ValidateResponse)(nil),      // 9: resource.ValidateResponse
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
-	(*emptypb.Empty)(nil),         // 12: google.protobuf.Empty
+	(ResourceStatus)(0),                 // 0: resource.ResourceStatus
+	(*ResourceResponse)(nil),            // 1: resource.ResourceResponse
+	(*CreateResourceRequest)(nil),       // 2: resource.CreateResourceRequest
+	(*GetResourceRequest)(nil),          // 3: resource.GetResourceRequest
+	(*ListResourcesRequest)(nil),        // 4: resource.ListResourcesRequest
+	(*ListResourcesResponse)(nil),       // 5: resource.ListResourcesResponse
+	(*ListActiveResourcesRequest)(nil),  // 6: resource.ListActiveResourcesRequest
+	(*ListActiveResourcesResponse)(nil), // 7: resource.ListActiveResourcesResponse
+	(*UpdateResourceRequest)(nil),       // 8: resource.UpdateResourceRequest
+	(*DeleteResourceRequest)(nil),       // 9: resource.DeleteResourceRequest
+	(*ValidateRequest)(nil),             // 10: resource.ValidateRequest
+	(*ValidateResponse)(nil),            // 11: resource.ValidateResponse
+	(*timestamppb.Timestamp)(nil),       // 12: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),       // 13: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),               // 14: google.protobuf.Empty
 }
 var file_resource_proto_depIdxs = []int32{
 	0,  // 0: resource.ResourceResponse.status:type_name -> resource.ResourceStatus
-	10, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
-	10, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
+	12, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
+	12, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 3: resource.ListResourcesResponse.resources:type_name -> resource.ResourceResponse
-	1,  // 4: resource.UpdateResourceRequest.resource:type_name -> resource.ResourceResponse
-	11, // 5: resource.UpdateResourceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	2,  // 6: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
-	3,  // 7: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
-	4,  // 8: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
-	6,  // 9: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
-	7,  // 10: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
-	8,  // 11: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
-	1,  // 12: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
-	1,  // 13: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
-	5,  // 14: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
-	1,  // 15: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
-	12, // 16: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
-	9,  // 17: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
-	12, // [12:18] is the sub-list for method output_type
-	6,  // [6:12] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	1,  // 4: resource.ListActiveResourcesResponse.resources:type_name -> resource.ResourceResponse
+	1,  // 5: resource.UpdateResourceRequest.resource:type_name -> resource.ResourceResponse
+	13, // 6: resource.UpdateResourceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	2,  // 7: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
+	3,  // 8: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
+	4,  // 9: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
+	4,  // 10: resource.ResourceService.ListActiveResources:input_type -> resource.ListResourcesRequest
+	8,  // 11: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
+	9,  // 12: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
+	10, // 13: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
+	1,  // 14: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
+	1,  // 15: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
+	5,  // 16: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
+	5,  // 17: resource.ResourceService.ListActiveResources:output_type -> resource.ListResourcesResponse
+	1,  // 18: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
+	14, // 19: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
+	11, // 20: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_resource_proto_init() }
@@ -793,7 +919,7 @@ func file_resource_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_resource_proto_rawDesc), len(file_resource_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
