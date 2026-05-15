@@ -31,6 +31,7 @@ const (
 	IdentityService_PromoteToModerator_FullMethodName  = "/identity.IdentityService/PromoteToModerator"
 	IdentityService_DemoteFromModerator_FullMethodName = "/identity.IdentityService/DemoteFromModerator"
 	IdentityService_CheckUserBanned_FullMethodName     = "/identity.IdentityService/CheckUserBanned"
+	IdentityService_VerifyEmail_FullMethodName         = "/identity.IdentityService/VerifyEmail"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
@@ -61,6 +62,8 @@ type IdentityServiceClient interface {
 	DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	// INTERNAL: Check if user is currently banned
 	CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponse, error)
+	// VERIFY CODE BY EMAIL
+	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type identityServiceClient struct {
@@ -181,6 +184,16 @@ func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUs
 	return out, nil
 }
 
+func (c *identityServiceClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, IdentityService_VerifyEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
@@ -209,6 +222,8 @@ type IdentityServiceServer interface {
 	DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error)
 	// INTERNAL: Check if user is currently banned
 	CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error)
+	// VERIFY CODE BY EMAIL
+	VerifyEmail(context.Context, *VerifyEmailRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -251,6 +266,9 @@ func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *
 }
 func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserBanned not implemented")
+}
+func (UnimplementedIdentityServiceServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method VerifyEmail not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -471,6 +489,24 @@ func _IdentityService_CheckUserBanned_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).VerifyEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_VerifyEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).VerifyEmail(ctx, req.(*VerifyEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -521,6 +557,10 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckUserBanned",
 			Handler:    _IdentityService_CheckUserBanned_Handler,
+		},
+		{
+			MethodName: "VerifyEmail",
+			Handler:    _IdentityService_VerifyEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
