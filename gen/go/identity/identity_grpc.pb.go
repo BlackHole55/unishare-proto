@@ -32,6 +32,7 @@ const (
 	IdentityService_UnbanUser_FullMethodName           = "/identity.IdentityService/UnbanUser"
 	IdentityService_PromoteToModerator_FullMethodName  = "/identity.IdentityService/PromoteToModerator"
 	IdentityService_DemoteFromModerator_FullMethodName = "/identity.IdentityService/DemoteFromModerator"
+	IdentityService_CheckUserBanned_FullMethodName     = "/identity.IdentityService/CheckUserBanned"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
@@ -50,6 +51,7 @@ type IdentityServiceClient interface {
 	UnbanUser(ctx context.Context, in *UnbanUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PromoteToModerator(ctx context.Context, in *PromoteToModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	DemoteFromModerator(ctx context.Context, in *DemoteFromModeratorRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	CheckUserBanned(ctx context.Context, in *CheckUserBannnedRequest, opts ...grpc.CallOption) (*CheckUserBannnedResponce, error)
 }
 
 type identityServiceClient struct {
@@ -180,6 +182,16 @@ func (c *identityServiceClient) DemoteFromModerator(ctx context.Context, in *Dem
 	return out, nil
 }
 
+func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUserBannnedRequest, opts ...grpc.CallOption) (*CheckUserBannnedResponce, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckUserBannnedResponce)
+	err := c.cc.Invoke(ctx, IdentityService_CheckUserBanned_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
@@ -196,6 +208,7 @@ type IdentityServiceServer interface {
 	UnbanUser(context.Context, *UnbanUserRequest) (*emptypb.Empty, error)
 	PromoteToModerator(context.Context, *PromoteToModeratorRequest) (*UserResponse, error)
 	DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error)
+	CheckUserBanned(context.Context, *CheckUserBannnedRequest) (*CheckUserBannnedResponce, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -241,6 +254,9 @@ func (UnimplementedIdentityServiceServer) PromoteToModerator(context.Context, *P
 }
 func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *DemoteFromModeratorRequest) (*UserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DemoteFromModerator not implemented")
+}
+func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannnedRequest) (*CheckUserBannnedResponce, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckUserBanned not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -479,6 +495,24 @@ func _IdentityService_DemoteFromModerator_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_CheckUserBanned_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckUserBannnedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).CheckUserBanned(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_CheckUserBanned_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).CheckUserBanned(ctx, req.(*CheckUserBannnedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -533,6 +567,10 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DemoteFromModerator",
 			Handler:    _IdentityService_DemoteFromModerator_Handler,
+		},
+		{
+			MethodName: "CheckUserBanned",
+			Handler:    _IdentityService_CheckUserBanned_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

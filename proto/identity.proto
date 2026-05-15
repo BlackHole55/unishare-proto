@@ -34,6 +34,7 @@ service IdentityService {
     rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
     rpc PromoteToModerator (PromoteToModeratorRequest) returns (UserResponse);
     rpc DemoteFromModerator (DemoteFromModeratorRequest) returns (UserResponse);
+    rpc CheckUserBanned (CheckUserBannnedRequest) returns (CheckUserBannnedResponce);
 }
 
 message UserResponse {
@@ -120,4 +121,12 @@ message PromoteToModeratorRequest {
 
 message DemoteFromModeratorRequest {
     string user_id = 1;
+}
+
+message CheckUserBannnedRequest {
+    string user_id =1;
+}
+
+message CheckUserBannnedResponce{
+    bool banned=1;
 }
