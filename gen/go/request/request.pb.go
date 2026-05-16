@@ -4,9 +4,10 @@
 // 	protoc        v7.34.1
 // source: request.proto
 
-package unishare_proto
+package request
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -820,7 +821,7 @@ var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\arequest\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x02\n" +
+	"\rrequest.proto\x12\arequest\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xb2\x02\n" +
 	"\aRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vresource_id\x18\x02 \x01(\tR\n" +
@@ -882,15 +883,15 @@ const file_request_proto_rawDesc = "" +
 	"\x16REQUEST_STATUS_PENDING\x10\x01\x12\x1b\n" +
 	"\x17REQUEST_STATUS_APPROVED\x10\x02\x12\x1b\n" +
 	"\x17REQUEST_STATUS_REJECTED\x10\x03\x12\x1b\n" +
-	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\x85\x04\n" +
-	"\x0eRequestService\x12N\n" +
-	"\rCreateRequest\x12\x1d.request.CreateRequestRequest\x1a\x1e.request.CreateRequestResponse\x12E\n" +
+	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\xba\x05\n" +
+	"\x0eRequestService\x12j\n" +
+	"\rCreateRequest\x12\x1d.request.CreateRequestRequest\x1a\x1e.request.CreateRequestResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/v1/request\x12c\n" +
 	"\n" +
-	"GetRequest\x12\x1a.request.GetRequestRequest\x1a\x1b.request.GetRequestResponse\x12K\n" +
-	"\fListRequests\x12\x1c.request.ListRequestsRequest\x1a\x1d.request.ListRequestsResponse\x12]\n" +
-	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\x12`\n" +
-	"\x13UpdateRequestStatus\x12#.request.UpdateRequestStatusRequest\x1a$.request.UpdateRequestStatusResponse\x12N\n" +
-	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponseB'Z%github.com/BlackHole55/unishare-protob\x06proto3"
+	"GetRequest\x12\x1a.request.GetRequestRequest\x1a\x1b.request.GetRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/request/{id}\x12e\n" +
+	"\fListRequests\x12\x1c.request.ListRequestsRequest\x1a\x1d.request.ListRequestsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/requests\x12~\n" +
+	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/requests/active\x12\x81\x01\n" +
+	"\x13UpdateRequestStatus\x12#.request.UpdateRequestStatusRequest\x1a$.request.UpdateRequestStatusResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/api/v1/request/{id}\x12l\n" +
+	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/request/{id}B7Z5github.com/BlackHole55/unishare-proto/request;requestb\x06proto3"
 
 var (
 	file_request_proto_rawDescOnce sync.Once

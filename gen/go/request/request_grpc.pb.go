@@ -4,7 +4,7 @@
 // - protoc             v7.34.1
 // source: request.proto
 
-package unishare_proto
+package request
 
 import (
 	context "context"

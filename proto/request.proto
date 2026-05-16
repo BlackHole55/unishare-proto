@@ -5,6 +5,7 @@ package request;
 option go_package = "github.com/BlackHole55/unishare-proto/request;request";
 
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 
 // Enums
 enum RequestStatus {
@@ -18,22 +19,48 @@ enum RequestStatus {
 // Service
 service RequestService {
   // Create a new request (status defaults to PENDING).
-  rpc CreateRequest(CreateRequestRequest) returns (CreateRequestResponse);
+  rpc CreateRequest(CreateRequestRequest) returns (CreateRequestResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/request"
+      body: "*"
+    };
+  };
 
   // Retrieve a single request by ID.
-  rpc GetRequest(GetRequestRequest) returns (GetRequestResponse);
+  rpc GetRequest(GetRequestRequest) returns (GetRequestResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/request/{id}"
+    };
+  };
 
   // List requests with optional filters and pagination.
-  rpc ListRequests(ListRequestsRequest) returns (ListRequestsResponse);
+  rpc ListRequests(ListRequestsRequest) returns (ListRequestsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/requests"
+    };
+  };
 
   // List all requests excluding archived ones.
-  rpc ListActiveRequests(ListActiveRequestsRequest) returns (ListActiveRequestsResponse);
+  rpc ListActiveRequests(ListActiveRequestsRequest) returns (ListActiveRequestsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/requests/active"
+    };
+  };
 
   // Transition a request to APPROVED, REJECTED, or ARCHIVED.
-  rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse);
+  rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/{id}"
+      body: "*"
+    };
+  };
 
   // Permanently delete a request record.
-  rpc DeleteRequest(DeleteRequestRequest) returns (DeleteRequestResponse);
+  rpc DeleteRequest(DeleteRequestRequest) returns (DeleteRequestResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/request/{id}"
+    };
+  };
 }
 
 
