@@ -59,7 +59,7 @@ service RequestService {
   rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
     option (google.api.http) = {
       patch: "/api/v1/requests/{id}/approve"
-      body: "*"
+      body: ""
     };
   };
 
@@ -67,7 +67,7 @@ service RequestService {
   rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
     option (google.api.http) = {
       patch: "/api/v1/requests/{id}/reject"
-      body: "*"
+      body: ""
     };
   };
 
