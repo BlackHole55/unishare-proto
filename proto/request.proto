@@ -61,26 +61,44 @@ service RequestService {
     };
   };
 
-  // // Approve request
-  // rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
-  //   option (google.api.http) = {
-  //     patch: "/api/v1/requests/{id}/approve"
-  //     body: ""
-  //   };
-  // };
-
-  // // Reject request
-  // rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
-  //   option (google.api.http) = {
-  //     patch: "/api/v1/requests/{id}/reject"
-  //     body: ""
-  //   };
-  // };
-
   // Permanently delete a request record.
   rpc DeleteRequest(DeleteRequestRequest) returns (DeleteRequestResponse) {
     option (google.api.http) = {
       delete: "/api/v1/request/{id}"
+    };
+  };
+  
+  
+  rpc ListRequestsByRequester(ListRequestsByRequesterRequest) returns (ListRequestsByRequesterResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/users/{requester_id}/sent-requests"
+    };
+  };
+
+rpc ArchiveRequest(ArchiveRequestRequest) returns (ArchiveRequestResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/{id}/archive"
+      body: "*"
+    };
+  };
+
+rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/{id}/approve"
+      body: "*"
+    };
+  };
+
+rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/{id}/reject"
+      body: "*"
+    };
+  };
+
+rpc CountRequestsByStatus(CountRequestsByStatusRequest) returns (CountRequestsByStatusResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/requests/count"
     };
   };
 }
@@ -184,9 +202,25 @@ message RejectRequestResponse {
   Request request = 1;
 }
 
-// DeleteRequest  (hard delete; prefer ARCHIVED for soft delete)
 message DeleteRequestRequest {
   string id = 1;
 }
 
 message DeleteRequestResponse {}
+
+message ListRequestsByRequesterRequest {
+  string requester_id = 1;
+  int32  page_size    = 2;
+  string page_token   = 3;
+}
+message ListRequestsByRequesterResponse {
+  repeated Request requests        = 1;
+  string           next_page_token = 2;
+  int32            total_count     = 3;
+}
+
+message ArchiveRequestRequest  { string id = 1; }
+message ArchiveRequestResponse { Request request = 1; }
+
+message CountRequestsByStatusRequest  { RequestStatus status = 1; }
+message CountRequestsByStatusResponse { int32 count = 1; }

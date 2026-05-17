@@ -1031,7 +1031,6 @@ func (x *RejectRequestResponse) GetRequest() *Request {
 	return nil
 }
 
-// DeleteRequest  (hard delete; prefer ARCHIVED for soft delete)
 type DeleteRequestRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1112,6 +1111,302 @@ func (*DeleteRequestResponse) Descriptor() ([]byte, []int) {
 	return file_request_proto_rawDescGZIP(), []int{18}
 }
 
+type ListRequestsByRequesterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RequesterId   string                 `protobuf:"bytes,1,opt,name=requester_id,json=requesterId,proto3" json:"requester_id,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListRequestsByRequesterRequest) Reset() {
+	*x = ListRequestsByRequesterRequest{}
+	mi := &file_request_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListRequestsByRequesterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListRequestsByRequesterRequest) ProtoMessage() {}
+
+func (x *ListRequestsByRequesterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListRequestsByRequesterRequest.ProtoReflect.Descriptor instead.
+func (*ListRequestsByRequesterRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListRequestsByRequesterRequest) GetRequesterId() string {
+	if x != nil {
+		return x.RequesterId
+	}
+	return ""
+}
+
+func (x *ListRequestsByRequesterRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListRequestsByRequesterRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListRequestsByRequesterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Requests      []*Request             `protobuf:"bytes,1,rep,name=requests,proto3" json:"requests,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListRequestsByRequesterResponse) Reset() {
+	*x = ListRequestsByRequesterResponse{}
+	mi := &file_request_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListRequestsByRequesterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListRequestsByRequesterResponse) ProtoMessage() {}
+
+func (x *ListRequestsByRequesterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListRequestsByRequesterResponse.ProtoReflect.Descriptor instead.
+func (*ListRequestsByRequesterResponse) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ListRequestsByRequesterResponse) GetRequests() []*Request {
+	if x != nil {
+		return x.Requests
+	}
+	return nil
+}
+
+func (x *ListRequestsByRequesterResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+func (x *ListRequestsByRequesterResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+type ArchiveRequestRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveRequestRequest) Reset() {
+	*x = ArchiveRequestRequest{}
+	mi := &file_request_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveRequestRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveRequestRequest) ProtoMessage() {}
+
+func (x *ArchiveRequestRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveRequestRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveRequestRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ArchiveRequestRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type ArchiveRequestResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Request       *Request               `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveRequestResponse) Reset() {
+	*x = ArchiveRequestResponse{}
+	mi := &file_request_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveRequestResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveRequestResponse) ProtoMessage() {}
+
+func (x *ArchiveRequestResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveRequestResponse.ProtoReflect.Descriptor instead.
+func (*ArchiveRequestResponse) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ArchiveRequestResponse) GetRequest() *Request {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type CountRequestsByStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        RequestStatus          `protobuf:"varint,1,opt,name=status,proto3,enum=request.RequestStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CountRequestsByStatusRequest) Reset() {
+	*x = CountRequestsByStatusRequest{}
+	mi := &file_request_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CountRequestsByStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountRequestsByStatusRequest) ProtoMessage() {}
+
+func (x *CountRequestsByStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountRequestsByStatusRequest.ProtoReflect.Descriptor instead.
+func (*CountRequestsByStatusRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *CountRequestsByStatusRequest) GetStatus() RequestStatus {
+	if x != nil {
+		return x.Status
+	}
+	return RequestStatus_REQUEST_STATUS_UNSPECIFIED
+}
+
+type CountRequestsByStatusResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CountRequestsByStatusResponse) Reset() {
+	*x = CountRequestsByStatusResponse{}
+	mi := &file_request_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CountRequestsByStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountRequestsByStatusResponse) ProtoMessage() {}
+
+func (x *CountRequestsByStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountRequestsByStatusResponse.ProtoReflect.Descriptor instead.
+func (*CountRequestsByStatusResponse) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *CountRequestsByStatusResponse) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
@@ -1190,13 +1485,31 @@ const file_request_proto_rawDesc = "" +
 	"\arequest\x18\x01 \x01(\v2\x10.request.RequestR\arequest\"&\n" +
 	"\x14DeleteRequestRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x17\n" +
-	"\x15DeleteRequestResponse*\xa2\x01\n" +
+	"\x15DeleteRequestResponse\"\x7f\n" +
+	"\x1eListRequestsByRequesterRequest\x12!\n" +
+	"\frequester_id\x18\x01 \x01(\tR\vrequesterId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x98\x01\n" +
+	"\x1fListRequestsByRequesterResponse\x12,\n" +
+	"\brequests\x18\x01 \x03(\v2\x10.request.RequestR\brequests\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\"'\n" +
+	"\x15ArchiveRequestRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"D\n" +
+	"\x16ArchiveRequestResponse\x12*\n" +
+	"\arequest\x18\x01 \x01(\v2\x10.request.RequestR\arequest\"N\n" +
+	"\x1cCountRequestsByStatusRequest\x12.\n" +
+	"\x06status\x18\x01 \x01(\x0e2\x16.request.RequestStatusR\x06status\"5\n" +
+	"\x1dCountRequestsByStatusResponse\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count*\xa2\x01\n" +
 	"\rRequestStatus\x12\x1e\n" +
 	"\x1aREQUEST_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16REQUEST_STATUS_PENDING\x10\x01\x12\x1b\n" +
 	"\x17REQUEST_STATUS_APPROVED\x10\x02\x12\x1b\n" +
 	"\x17REQUEST_STATUS_REJECTED\x10\x03\x12\x1b\n" +
-	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\xc8\x06\n" +
+	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\xe4\v\n" +
 	"\x0eRequestService\x12j\n" +
 	"\rCreateRequest\x12\x1d.request.CreateRequestRequest\x1a\x1e.request.CreateRequestResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/v1/request\x12c\n" +
 	"\n" +
@@ -1205,7 +1518,12 @@ const file_request_proto_rawDesc = "" +
 	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/requests/active\x12\x8b\x01\n" +
 	"\x13ListRequestsByOwner\x12#.request.ListRequestsByOwnerRequest\x1a$.request.ListRequestsByOwnerResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/v1/users/{owner_id}/requests\x12\x81\x01\n" +
 	"\x13UpdateRequestStatus\x12#.request.UpdateRequestStatusRequest\x1a$.request.UpdateRequestStatusResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/api/v1/request/{id}\x12l\n" +
-	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/request/{id}B7Z5github.com/BlackHole55/unishare-proto/request;requestb\x06proto3"
+	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/request/{id}\x12\xa0\x01\n" +
+	"\x17ListRequestsByRequester\x12'.request.ListRequestsByRequesterRequest\x1a(.request.ListRequestsByRequesterResponse\"2\x82\xd3\xe4\x93\x02,\x12*/api/v1/users/{requester_id}/sent-requests\x12z\n" +
+	"\x0eArchiveRequest\x12\x1e.request.ArchiveRequestRequest\x1a\x1f.request.ArchiveRequestResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/api/v1/request/{id}/archive\x12z\n" +
+	"\x0eApproveRequest\x12\x1e.request.ApproveRequestRequest\x1a\x1f.request.ApproveRequestResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/api/v1/request/{id}/approve\x12v\n" +
+	"\rRejectRequest\x12\x1d.request.RejectRequestRequest\x1a\x1e.request.RejectRequestResponse\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/api/v1/request/{id}/reject\x12\x86\x01\n" +
+	"\x15CountRequestsByStatus\x12%.request.CountRequestsByStatusRequest\x1a&.request.CountRequestsByStatusResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/v1/requests/countB7Z5github.com/BlackHole55/unishare-proto/request;requestb\x06proto3"
 
 var (
 	file_request_proto_rawDescOnce sync.Once
@@ -1220,34 +1538,40 @@ func file_request_proto_rawDescGZIP() []byte {
 }
 
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_request_proto_goTypes = []any{
-	(RequestStatus)(0),                  // 0: request.RequestStatus
-	(*Request)(nil),                     // 1: request.Request
-	(*CreateRequestRequest)(nil),        // 2: request.CreateRequestRequest
-	(*CreateRequestResponse)(nil),       // 3: request.CreateRequestResponse
-	(*GetRequestRequest)(nil),           // 4: request.GetRequestRequest
-	(*GetRequestResponse)(nil),          // 5: request.GetRequestResponse
-	(*ListRequestsRequest)(nil),         // 6: request.ListRequestsRequest
-	(*ListRequestsResponse)(nil),        // 7: request.ListRequestsResponse
-	(*ListActiveRequestsRequest)(nil),   // 8: request.ListActiveRequestsRequest
-	(*ListActiveRequestsResponse)(nil),  // 9: request.ListActiveRequestsResponse
-	(*ListRequestsByOwnerRequest)(nil),  // 10: request.ListRequestsByOwnerRequest
-	(*ListRequestsByOwnerResponse)(nil), // 11: request.ListRequestsByOwnerResponse
-	(*UpdateRequestStatusRequest)(nil),  // 12: request.UpdateRequestStatusRequest
-	(*UpdateRequestStatusResponse)(nil), // 13: request.UpdateRequestStatusResponse
-	(*ApproveRequestRequest)(nil),       // 14: request.ApproveRequestRequest
-	(*ApproveRequestResponse)(nil),      // 15: request.ApproveRequestResponse
-	(*RejectRequestRequest)(nil),        // 16: request.RejectRequestRequest
-	(*RejectRequestResponse)(nil),       // 17: request.RejectRequestResponse
-	(*DeleteRequestRequest)(nil),        // 18: request.DeleteRequestRequest
-	(*DeleteRequestResponse)(nil),       // 19: request.DeleteRequestResponse
-	(*timestamppb.Timestamp)(nil),       // 20: google.protobuf.Timestamp
+	(RequestStatus)(0),                      // 0: request.RequestStatus
+	(*Request)(nil),                         // 1: request.Request
+	(*CreateRequestRequest)(nil),            // 2: request.CreateRequestRequest
+	(*CreateRequestResponse)(nil),           // 3: request.CreateRequestResponse
+	(*GetRequestRequest)(nil),               // 4: request.GetRequestRequest
+	(*GetRequestResponse)(nil),              // 5: request.GetRequestResponse
+	(*ListRequestsRequest)(nil),             // 6: request.ListRequestsRequest
+	(*ListRequestsResponse)(nil),            // 7: request.ListRequestsResponse
+	(*ListActiveRequestsRequest)(nil),       // 8: request.ListActiveRequestsRequest
+	(*ListActiveRequestsResponse)(nil),      // 9: request.ListActiveRequestsResponse
+	(*ListRequestsByOwnerRequest)(nil),      // 10: request.ListRequestsByOwnerRequest
+	(*ListRequestsByOwnerResponse)(nil),     // 11: request.ListRequestsByOwnerResponse
+	(*UpdateRequestStatusRequest)(nil),      // 12: request.UpdateRequestStatusRequest
+	(*UpdateRequestStatusResponse)(nil),     // 13: request.UpdateRequestStatusResponse
+	(*ApproveRequestRequest)(nil),           // 14: request.ApproveRequestRequest
+	(*ApproveRequestResponse)(nil),          // 15: request.ApproveRequestResponse
+	(*RejectRequestRequest)(nil),            // 16: request.RejectRequestRequest
+	(*RejectRequestResponse)(nil),           // 17: request.RejectRequestResponse
+	(*DeleteRequestRequest)(nil),            // 18: request.DeleteRequestRequest
+	(*DeleteRequestResponse)(nil),           // 19: request.DeleteRequestResponse
+	(*ListRequestsByRequesterRequest)(nil),  // 20: request.ListRequestsByRequesterRequest
+	(*ListRequestsByRequesterResponse)(nil), // 21: request.ListRequestsByRequesterResponse
+	(*ArchiveRequestRequest)(nil),           // 22: request.ArchiveRequestRequest
+	(*ArchiveRequestResponse)(nil),          // 23: request.ArchiveRequestResponse
+	(*CountRequestsByStatusRequest)(nil),    // 24: request.CountRequestsByStatusRequest
+	(*CountRequestsByStatusResponse)(nil),   // 25: request.CountRequestsByStatusResponse
+	(*timestamppb.Timestamp)(nil),           // 26: google.protobuf.Timestamp
 }
 var file_request_proto_depIdxs = []int32{
 	0,  // 0: request.Request.status:type_name -> request.RequestStatus
-	20, // 1: request.Request.created_at:type_name -> google.protobuf.Timestamp
-	20, // 2: request.Request.updated_at:type_name -> google.protobuf.Timestamp
+	26, // 1: request.Request.created_at:type_name -> google.protobuf.Timestamp
+	26, // 2: request.Request.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 3: request.CreateRequestResponse.request:type_name -> request.Request
 	1,  // 4: request.GetRequestResponse.request:type_name -> request.Request
 	0,  // 5: request.ListRequestsRequest.status:type_name -> request.RequestStatus
@@ -1258,25 +1582,38 @@ var file_request_proto_depIdxs = []int32{
 	1,  // 10: request.UpdateRequestStatusResponse.request:type_name -> request.Request
 	1,  // 11: request.ApproveRequestResponse.request:type_name -> request.Request
 	1,  // 12: request.RejectRequestResponse.request:type_name -> request.Request
-	2,  // 13: request.RequestService.CreateRequest:input_type -> request.CreateRequestRequest
-	4,  // 14: request.RequestService.GetRequest:input_type -> request.GetRequestRequest
-	6,  // 15: request.RequestService.ListRequests:input_type -> request.ListRequestsRequest
-	8,  // 16: request.RequestService.ListActiveRequests:input_type -> request.ListActiveRequestsRequest
-	10, // 17: request.RequestService.ListRequestsByOwner:input_type -> request.ListRequestsByOwnerRequest
-	12, // 18: request.RequestService.UpdateRequestStatus:input_type -> request.UpdateRequestStatusRequest
-	18, // 19: request.RequestService.DeleteRequest:input_type -> request.DeleteRequestRequest
-	3,  // 20: request.RequestService.CreateRequest:output_type -> request.CreateRequestResponse
-	5,  // 21: request.RequestService.GetRequest:output_type -> request.GetRequestResponse
-	7,  // 22: request.RequestService.ListRequests:output_type -> request.ListRequestsResponse
-	9,  // 23: request.RequestService.ListActiveRequests:output_type -> request.ListActiveRequestsResponse
-	11, // 24: request.RequestService.ListRequestsByOwner:output_type -> request.ListRequestsByOwnerResponse
-	13, // 25: request.RequestService.UpdateRequestStatus:output_type -> request.UpdateRequestStatusResponse
-	19, // 26: request.RequestService.DeleteRequest:output_type -> request.DeleteRequestResponse
-	20, // [20:27] is the sub-list for method output_type
-	13, // [13:20] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	1,  // 13: request.ListRequestsByRequesterResponse.requests:type_name -> request.Request
+	1,  // 14: request.ArchiveRequestResponse.request:type_name -> request.Request
+	0,  // 15: request.CountRequestsByStatusRequest.status:type_name -> request.RequestStatus
+	2,  // 16: request.RequestService.CreateRequest:input_type -> request.CreateRequestRequest
+	4,  // 17: request.RequestService.GetRequest:input_type -> request.GetRequestRequest
+	6,  // 18: request.RequestService.ListRequests:input_type -> request.ListRequestsRequest
+	8,  // 19: request.RequestService.ListActiveRequests:input_type -> request.ListActiveRequestsRequest
+	10, // 20: request.RequestService.ListRequestsByOwner:input_type -> request.ListRequestsByOwnerRequest
+	12, // 21: request.RequestService.UpdateRequestStatus:input_type -> request.UpdateRequestStatusRequest
+	18, // 22: request.RequestService.DeleteRequest:input_type -> request.DeleteRequestRequest
+	20, // 23: request.RequestService.ListRequestsByRequester:input_type -> request.ListRequestsByRequesterRequest
+	22, // 24: request.RequestService.ArchiveRequest:input_type -> request.ArchiveRequestRequest
+	14, // 25: request.RequestService.ApproveRequest:input_type -> request.ApproveRequestRequest
+	16, // 26: request.RequestService.RejectRequest:input_type -> request.RejectRequestRequest
+	24, // 27: request.RequestService.CountRequestsByStatus:input_type -> request.CountRequestsByStatusRequest
+	3,  // 28: request.RequestService.CreateRequest:output_type -> request.CreateRequestResponse
+	5,  // 29: request.RequestService.GetRequest:output_type -> request.GetRequestResponse
+	7,  // 30: request.RequestService.ListRequests:output_type -> request.ListRequestsResponse
+	9,  // 31: request.RequestService.ListActiveRequests:output_type -> request.ListActiveRequestsResponse
+	11, // 32: request.RequestService.ListRequestsByOwner:output_type -> request.ListRequestsByOwnerResponse
+	13, // 33: request.RequestService.UpdateRequestStatus:output_type -> request.UpdateRequestStatusResponse
+	19, // 34: request.RequestService.DeleteRequest:output_type -> request.DeleteRequestResponse
+	21, // 35: request.RequestService.ListRequestsByRequester:output_type -> request.ListRequestsByRequesterResponse
+	23, // 36: request.RequestService.ArchiveRequest:output_type -> request.ArchiveRequestResponse
+	15, // 37: request.RequestService.ApproveRequest:output_type -> request.ApproveRequestResponse
+	17, // 38: request.RequestService.RejectRequest:output_type -> request.RejectRequestResponse
+	25, // 39: request.RequestService.CountRequestsByStatus:output_type -> request.CountRequestsByStatusResponse
+	28, // [28:40] is the sub-list for method output_type
+	16, // [16:28] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -1290,7 +1627,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   19,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

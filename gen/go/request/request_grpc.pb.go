@@ -19,13 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RequestService_CreateRequest_FullMethodName       = "/request.RequestService/CreateRequest"
-	RequestService_GetRequest_FullMethodName          = "/request.RequestService/GetRequest"
-	RequestService_ListRequests_FullMethodName        = "/request.RequestService/ListRequests"
-	RequestService_ListActiveRequests_FullMethodName  = "/request.RequestService/ListActiveRequests"
-	RequestService_ListRequestsByOwner_FullMethodName = "/request.RequestService/ListRequestsByOwner"
-	RequestService_UpdateRequestStatus_FullMethodName = "/request.RequestService/UpdateRequestStatus"
-	RequestService_DeleteRequest_FullMethodName       = "/request.RequestService/DeleteRequest"
+	RequestService_CreateRequest_FullMethodName           = "/request.RequestService/CreateRequest"
+	RequestService_GetRequest_FullMethodName              = "/request.RequestService/GetRequest"
+	RequestService_ListRequests_FullMethodName            = "/request.RequestService/ListRequests"
+	RequestService_ListActiveRequests_FullMethodName      = "/request.RequestService/ListActiveRequests"
+	RequestService_ListRequestsByOwner_FullMethodName     = "/request.RequestService/ListRequestsByOwner"
+	RequestService_UpdateRequestStatus_FullMethodName     = "/request.RequestService/UpdateRequestStatus"
+	RequestService_DeleteRequest_FullMethodName           = "/request.RequestService/DeleteRequest"
+	RequestService_ListRequestsByRequester_FullMethodName = "/request.RequestService/ListRequestsByRequester"
+	RequestService_ArchiveRequest_FullMethodName          = "/request.RequestService/ArchiveRequest"
+	RequestService_ApproveRequest_FullMethodName          = "/request.RequestService/ApproveRequest"
+	RequestService_RejectRequest_FullMethodName           = "/request.RequestService/RejectRequest"
+	RequestService_CountRequestsByStatus_FullMethodName   = "/request.RequestService/CountRequestsByStatus"
 )
 
 // RequestServiceClient is the client API for RequestService service.
@@ -47,6 +52,11 @@ type RequestServiceClient interface {
 	UpdateRequestStatus(ctx context.Context, in *UpdateRequestStatusRequest, opts ...grpc.CallOption) (*UpdateRequestStatusResponse, error)
 	// Permanently delete a request record.
 	DeleteRequest(ctx context.Context, in *DeleteRequestRequest, opts ...grpc.CallOption) (*DeleteRequestResponse, error)
+	ListRequestsByRequester(ctx context.Context, in *ListRequestsByRequesterRequest, opts ...grpc.CallOption) (*ListRequestsByRequesterResponse, error)
+	ArchiveRequest(ctx context.Context, in *ArchiveRequestRequest, opts ...grpc.CallOption) (*ArchiveRequestResponse, error)
+	ApproveRequest(ctx context.Context, in *ApproveRequestRequest, opts ...grpc.CallOption) (*ApproveRequestResponse, error)
+	RejectRequest(ctx context.Context, in *RejectRequestRequest, opts ...grpc.CallOption) (*RejectRequestResponse, error)
+	CountRequestsByStatus(ctx context.Context, in *CountRequestsByStatusRequest, opts ...grpc.CallOption) (*CountRequestsByStatusResponse, error)
 }
 
 type requestServiceClient struct {
@@ -127,6 +137,56 @@ func (c *requestServiceClient) DeleteRequest(ctx context.Context, in *DeleteRequ
 	return out, nil
 }
 
+func (c *requestServiceClient) ListRequestsByRequester(ctx context.Context, in *ListRequestsByRequesterRequest, opts ...grpc.CallOption) (*ListRequestsByRequesterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRequestsByRequesterResponse)
+	err := c.cc.Invoke(ctx, RequestService_ListRequestsByRequester_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *requestServiceClient) ArchiveRequest(ctx context.Context, in *ArchiveRequestRequest, opts ...grpc.CallOption) (*ArchiveRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ArchiveRequestResponse)
+	err := c.cc.Invoke(ctx, RequestService_ArchiveRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *requestServiceClient) ApproveRequest(ctx context.Context, in *ApproveRequestRequest, opts ...grpc.CallOption) (*ApproveRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveRequestResponse)
+	err := c.cc.Invoke(ctx, RequestService_ApproveRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *requestServiceClient) RejectRequest(ctx context.Context, in *RejectRequestRequest, opts ...grpc.CallOption) (*RejectRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RejectRequestResponse)
+	err := c.cc.Invoke(ctx, RequestService_RejectRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *requestServiceClient) CountRequestsByStatus(ctx context.Context, in *CountRequestsByStatusRequest, opts ...grpc.CallOption) (*CountRequestsByStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CountRequestsByStatusResponse)
+	err := c.cc.Invoke(ctx, RequestService_CountRequestsByStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RequestServiceServer is the server API for RequestService service.
 // All implementations must embed UnimplementedRequestServiceServer
 // for forward compatibility.
@@ -146,6 +206,11 @@ type RequestServiceServer interface {
 	UpdateRequestStatus(context.Context, *UpdateRequestStatusRequest) (*UpdateRequestStatusResponse, error)
 	// Permanently delete a request record.
 	DeleteRequest(context.Context, *DeleteRequestRequest) (*DeleteRequestResponse, error)
+	ListRequestsByRequester(context.Context, *ListRequestsByRequesterRequest) (*ListRequestsByRequesterResponse, error)
+	ArchiveRequest(context.Context, *ArchiveRequestRequest) (*ArchiveRequestResponse, error)
+	ApproveRequest(context.Context, *ApproveRequestRequest) (*ApproveRequestResponse, error)
+	RejectRequest(context.Context, *RejectRequestRequest) (*RejectRequestResponse, error)
+	CountRequestsByStatus(context.Context, *CountRequestsByStatusRequest) (*CountRequestsByStatusResponse, error)
 	mustEmbedUnimplementedRequestServiceServer()
 }
 
@@ -176,6 +241,21 @@ func (UnimplementedRequestServiceServer) UpdateRequestStatus(context.Context, *U
 }
 func (UnimplementedRequestServiceServer) DeleteRequest(context.Context, *DeleteRequestRequest) (*DeleteRequestResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteRequest not implemented")
+}
+func (UnimplementedRequestServiceServer) ListRequestsByRequester(context.Context, *ListRequestsByRequesterRequest) (*ListRequestsByRequesterResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRequestsByRequester not implemented")
+}
+func (UnimplementedRequestServiceServer) ArchiveRequest(context.Context, *ArchiveRequestRequest) (*ArchiveRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArchiveRequest not implemented")
+}
+func (UnimplementedRequestServiceServer) ApproveRequest(context.Context, *ApproveRequestRequest) (*ApproveRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApproveRequest not implemented")
+}
+func (UnimplementedRequestServiceServer) RejectRequest(context.Context, *RejectRequestRequest) (*RejectRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RejectRequest not implemented")
+}
+func (UnimplementedRequestServiceServer) CountRequestsByStatus(context.Context, *CountRequestsByStatusRequest) (*CountRequestsByStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CountRequestsByStatus not implemented")
 }
 func (UnimplementedRequestServiceServer) mustEmbedUnimplementedRequestServiceServer() {}
 func (UnimplementedRequestServiceServer) testEmbeddedByValue()                        {}
@@ -324,6 +404,96 @@ func _RequestService_DeleteRequest_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RequestService_ListRequestsByRequester_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRequestsByRequesterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).ListRequestsByRequester(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_ListRequestsByRequester_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).ListRequestsByRequester(ctx, req.(*ListRequestsByRequesterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RequestService_ArchiveRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).ArchiveRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_ArchiveRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).ArchiveRequest(ctx, req.(*ArchiveRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RequestService_ApproveRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).ApproveRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_ApproveRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).ApproveRequest(ctx, req.(*ApproveRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RequestService_RejectRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).RejectRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_RejectRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).RejectRequest(ctx, req.(*RejectRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RequestService_CountRequestsByStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CountRequestsByStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).CountRequestsByStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_CountRequestsByStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).CountRequestsByStatus(ctx, req.(*CountRequestsByStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RequestService_ServiceDesc is the grpc.ServiceDesc for RequestService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -358,6 +528,26 @@ var RequestService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteRequest",
 			Handler:    _RequestService_DeleteRequest_Handler,
+		},
+		{
+			MethodName: "ListRequestsByRequester",
+			Handler:    _RequestService_ListRequestsByRequester_Handler,
+		},
+		{
+			MethodName: "ArchiveRequest",
+			Handler:    _RequestService_ArchiveRequest_Handler,
+		},
+		{
+			MethodName: "ApproveRequest",
+			Handler:    _RequestService_ApproveRequest_Handler,
+		},
+		{
+			MethodName: "RejectRequest",
+			Handler:    _RequestService_RejectRequest_Handler,
+		},
+		{
+			MethodName: "CountRequestsByStatus",
+			Handler:    _RequestService_CountRequestsByStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

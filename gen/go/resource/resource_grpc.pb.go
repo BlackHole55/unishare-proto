@@ -20,13 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ResourceService_CreateResource_FullMethodName      = "/resource.ResourceService/CreateResource"
-	ResourceService_GetResource_FullMethodName         = "/resource.ResourceService/GetResource"
-	ResourceService_ListResources_FullMethodName       = "/resource.ResourceService/ListResources"
-	ResourceService_ListActiveResources_FullMethodName = "/resource.ResourceService/ListActiveResources"
-	ResourceService_UpdateResource_FullMethodName      = "/resource.ResourceService/UpdateResource"
-	ResourceService_DeleteResource_FullMethodName      = "/resource.ResourceService/DeleteResource"
-	ResourceService_ValidateForRequest_FullMethodName  = "/resource.ResourceService/ValidateForRequest"
+	ResourceService_CreateResource_FullMethodName       = "/resource.ResourceService/CreateResource"
+	ResourceService_GetResource_FullMethodName          = "/resource.ResourceService/GetResource"
+	ResourceService_ListResources_FullMethodName        = "/resource.ResourceService/ListResources"
+	ResourceService_ListActiveResources_FullMethodName  = "/resource.ResourceService/ListActiveResources"
+	ResourceService_UpdateResource_FullMethodName       = "/resource.ResourceService/UpdateResource"
+	ResourceService_DeleteResource_FullMethodName       = "/resource.ResourceService/DeleteResource"
+	ResourceService_ValidateForRequest_FullMethodName   = "/resource.ResourceService/ValidateForRequest"
+	ResourceService_ListResourcesByOwner_FullMethodName = "/resource.ResourceService/ListResourcesByOwner"
+	ResourceService_SearchResources_FullMethodName      = "/resource.ResourceService/SearchResources"
+	ResourceService_ArchiveResource_FullMethodName      = "/resource.ResourceService/ArchiveResource"
+	ResourceService_RestoreResource_FullMethodName      = "/resource.ResourceService/RestoreResource"
+	ResourceService_CountResources_FullMethodName       = "/resource.ResourceService/CountResources"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -49,6 +54,11 @@ type ResourceServiceClient interface {
 	DeleteResource(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// INTERNAL: Used by Request Service to verify availability
 	ValidateForRequest(ctx context.Context, in *ValidateRequest, opts ...grpc.CallOption) (*ValidateResponse, error)
+	ListResourcesByOwner(ctx context.Context, in *ListResourcesByOwnerRequest, opts ...grpc.CallOption) (*ListResourcesByOwnerResponse, error)
+	SearchResources(ctx context.Context, in *SearchResourcesRequest, opts ...grpc.CallOption) (*SearchResourcesResponse, error)
+	ArchiveResource(ctx context.Context, in *ArchiveResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error)
+	RestoreResource(ctx context.Context, in *RestoreResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error)
+	CountResources(ctx context.Context, in *CountResourcesRequest, opts ...grpc.CallOption) (*CountResourcesResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -129,6 +139,56 @@ func (c *resourceServiceClient) ValidateForRequest(ctx context.Context, in *Vali
 	return out, nil
 }
 
+func (c *resourceServiceClient) ListResourcesByOwner(ctx context.Context, in *ListResourcesByOwnerRequest, opts ...grpc.CallOption) (*ListResourcesByOwnerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResourcesByOwnerResponse)
+	err := c.cc.Invoke(ctx, ResourceService_ListResourcesByOwner_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) SearchResources(ctx context.Context, in *SearchResourcesRequest, opts ...grpc.CallOption) (*SearchResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SearchResourcesResponse)
+	err := c.cc.Invoke(ctx, ResourceService_SearchResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) ArchiveResource(ctx context.Context, in *ArchiveResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceResponse)
+	err := c.cc.Invoke(ctx, ResourceService_ArchiveResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) RestoreResource(ctx context.Context, in *RestoreResourceRequest, opts ...grpc.CallOption) (*ResourceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceResponse)
+	err := c.cc.Invoke(ctx, ResourceService_RestoreResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) CountResources(ctx context.Context, in *CountResourcesRequest, opts ...grpc.CallOption) (*CountResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CountResourcesResponse)
+	err := c.cc.Invoke(ctx, ResourceService_CountResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations must embed UnimplementedResourceServiceServer
 // for forward compatibility.
@@ -149,6 +209,11 @@ type ResourceServiceServer interface {
 	DeleteResource(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error)
 	// INTERNAL: Used by Request Service to verify availability
 	ValidateForRequest(context.Context, *ValidateRequest) (*ValidateResponse, error)
+	ListResourcesByOwner(context.Context, *ListResourcesByOwnerRequest) (*ListResourcesByOwnerResponse, error)
+	SearchResources(context.Context, *SearchResourcesRequest) (*SearchResourcesResponse, error)
+	ArchiveResource(context.Context, *ArchiveResourceRequest) (*ResourceResponse, error)
+	RestoreResource(context.Context, *RestoreResourceRequest) (*ResourceResponse, error)
+	CountResources(context.Context, *CountResourcesRequest) (*CountResourcesResponse, error)
 	mustEmbedUnimplementedResourceServiceServer()
 }
 
@@ -179,6 +244,21 @@ func (UnimplementedResourceServiceServer) DeleteResource(context.Context, *Delet
 }
 func (UnimplementedResourceServiceServer) ValidateForRequest(context.Context, *ValidateRequest) (*ValidateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ValidateForRequest not implemented")
+}
+func (UnimplementedResourceServiceServer) ListResourcesByOwner(context.Context, *ListResourcesByOwnerRequest) (*ListResourcesByOwnerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListResourcesByOwner not implemented")
+}
+func (UnimplementedResourceServiceServer) SearchResources(context.Context, *SearchResourcesRequest) (*SearchResourcesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SearchResources not implemented")
+}
+func (UnimplementedResourceServiceServer) ArchiveResource(context.Context, *ArchiveResourceRequest) (*ResourceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArchiveResource not implemented")
+}
+func (UnimplementedResourceServiceServer) RestoreResource(context.Context, *RestoreResourceRequest) (*ResourceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreResource not implemented")
+}
+func (UnimplementedResourceServiceServer) CountResources(context.Context, *CountResourcesRequest) (*CountResourcesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CountResources not implemented")
 }
 func (UnimplementedResourceServiceServer) mustEmbedUnimplementedResourceServiceServer() {}
 func (UnimplementedResourceServiceServer) testEmbeddedByValue()                         {}
@@ -327,6 +407,96 @@ func _ResourceService_ValidateForRequest_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_ListResourcesByOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourcesByOwnerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).ListResourcesByOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_ListResourcesByOwner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).ListResourcesByOwner(ctx, req.(*ListResourcesByOwnerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ResourceService_SearchResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).SearchResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_SearchResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).SearchResources(ctx, req.(*SearchResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ResourceService_ArchiveResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveResourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).ArchiveResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_ArchiveResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).ArchiveResource(ctx, req.(*ArchiveResourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ResourceService_RestoreResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreResourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).RestoreResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_RestoreResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).RestoreResource(ctx, req.(*RestoreResourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ResourceService_CountResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CountResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).CountResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_CountResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).CountResources(ctx, req.(*CountResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ResourceService_ServiceDesc is the grpc.ServiceDesc for ResourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -361,6 +531,26 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateForRequest",
 			Handler:    _ResourceService_ValidateForRequest_Handler,
+		},
+		{
+			MethodName: "ListResourcesByOwner",
+			Handler:    _ResourceService_ListResourcesByOwner_Handler,
+		},
+		{
+			MethodName: "SearchResources",
+			Handler:    _ResourceService_SearchResources_Handler,
+		},
+		{
+			MethodName: "ArchiveResource",
+			Handler:    _ResourceService_ArchiveResource_Handler,
+		},
+		{
+			MethodName: "RestoreResource",
+			Handler:    _ResourceService_RestoreResource_Handler,
+		},
+		{
+			MethodName: "CountResources",
+			Handler:    _ResourceService_CountResources_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

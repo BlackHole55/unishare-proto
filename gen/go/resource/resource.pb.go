@@ -772,6 +772,422 @@ func (x *ValidateResponse) GetTitle() string {
 	return ""
 }
 
+type ListResourcesByOwnerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OwnerId       string                 `protobuf:"bytes,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListResourcesByOwnerRequest) Reset() {
+	*x = ListResourcesByOwnerRequest{}
+	mi := &file_resource_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListResourcesByOwnerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListResourcesByOwnerRequest) ProtoMessage() {}
+
+func (x *ListResourcesByOwnerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListResourcesByOwnerRequest.ProtoReflect.Descriptor instead.
+func (*ListResourcesByOwnerRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListResourcesByOwnerRequest) GetOwnerId() string {
+	if x != nil {
+		return x.OwnerId
+	}
+	return ""
+}
+
+func (x *ListResourcesByOwnerRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListResourcesByOwnerRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListResourcesByOwnerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resources     []*ResourceResponse    `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListResourcesByOwnerResponse) Reset() {
+	*x = ListResourcesByOwnerResponse{}
+	mi := &file_resource_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListResourcesByOwnerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListResourcesByOwnerResponse) ProtoMessage() {}
+
+func (x *ListResourcesByOwnerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListResourcesByOwnerResponse.ProtoReflect.Descriptor instead.
+func (*ListResourcesByOwnerResponse) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListResourcesByOwnerResponse) GetResources() []*ResourceResponse {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+func (x *ListResourcesByOwnerResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+func (x *ListResourcesByOwnerResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+type SearchResourcesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchResourcesRequest) Reset() {
+	*x = SearchResourcesRequest{}
+	mi := &file_resource_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchResourcesRequest) ProtoMessage() {}
+
+func (x *SearchResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchResourcesRequest.ProtoReflect.Descriptor instead.
+func (*SearchResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SearchResourcesRequest) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
+}
+
+func (x *SearchResourcesRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *SearchResourcesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type SearchResourcesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resources     []*ResourceResponse    `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchResourcesResponse) Reset() {
+	*x = SearchResourcesResponse{}
+	mi := &file_resource_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchResourcesResponse) ProtoMessage() {}
+
+func (x *SearchResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchResourcesResponse.ProtoReflect.Descriptor instead.
+func (*SearchResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SearchResourcesResponse) GetResources() []*ResourceResponse {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+func (x *SearchResourcesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+func (x *SearchResourcesResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+type ArchiveResourceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveResourceRequest) Reset() {
+	*x = ArchiveResourceRequest{}
+	mi := &file_resource_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveResourceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveResourceRequest) ProtoMessage() {}
+
+func (x *ArchiveResourceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveResourceRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveResourceRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ArchiveResourceRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type RestoreResourceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RestoreResourceRequest) Reset() {
+	*x = RestoreResourceRequest{}
+	mi := &file_resource_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RestoreResourceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestoreResourceRequest) ProtoMessage() {}
+
+func (x *RestoreResourceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestoreResourceRequest.ProtoReflect.Descriptor instead.
+func (*RestoreResourceRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *RestoreResourceRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type CountResourcesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ActiveOnly    bool                   `protobuf:"varint,1,opt,name=active_only,json=activeOnly,proto3" json:"active_only,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CountResourcesRequest) Reset() {
+	*x = CountResourcesRequest{}
+	mi := &file_resource_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CountResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountResourcesRequest) ProtoMessage() {}
+
+func (x *CountResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountResourcesRequest.ProtoReflect.Descriptor instead.
+func (*CountResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *CountResourcesRequest) GetActiveOnly() bool {
+	if x != nil {
+		return x.ActiveOnly
+	}
+	return false
+}
+
+type CountResourcesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CountResourcesResponse) Reset() {
+	*x = CountResourcesResponse{}
+	mi := &file_resource_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CountResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CountResourcesResponse) ProtoMessage() {}
+
+func (x *CountResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_resource_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CountResourcesResponse.ProtoReflect.Descriptor instead.
+func (*CountResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_resource_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *CountResourcesResponse) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_resource_proto protoreflect.FileDescriptor
 
 const file_resource_proto_rawDesc = "" +
@@ -831,14 +1247,43 @@ const file_resource_proto_rawDesc = "" +
 	"\x10ValidateResponse\x12!\n" +
 	"\fis_available\x18\x01 \x01(\bR\visAvailable\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\tR\aownerId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title*X\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\"t\n" +
+	"\x1bListResourcesByOwnerRequest\x12\x19\n" +
+	"\bowner_id\x18\x01 \x01(\tR\aownerId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\xa1\x01\n" +
+	"\x1cListResourcesByOwnerResponse\x128\n" +
+	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\"j\n" +
+	"\x16SearchResourcesRequest\x12\x14\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x9c\x01\n" +
+	"\x17SearchResourcesResponse\x128\n" +
+	"\tresources\x18\x01 \x03(\v2\x1a.resource.ResourceResponseR\tresources\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\"(\n" +
+	"\x16ArchiveResourceRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
+	"\x16RestoreResourceRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"8\n" +
+	"\x15CountResourcesRequest\x12\x1f\n" +
+	"\vactive_only\x18\x01 \x01(\bR\n" +
+	"activeOnly\".\n" +
+	"\x16CountResourcesResponse\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count*X\n" +
 	"\x0eResourceStatus\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\r\n" +
 	"\tAVAILABLE\x10\x01\x12\f\n" +
 	"\bRESERVED\x10\x02\x12\f\n" +
 	"\bARCHIVED\x10\x03\x12\n" +
 	"\n" +
-	"\x06BANNED\x10\x042\x88\x06\n" +
+	"\x06BANNED\x10\x042\x82\v\n" +
 	"\x0fResourceService\x12j\n" +
 	"\x0eCreateResource\x12\x1f.resource.CreateResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/resource\x12f\n" +
 	"\vGetResource\x12\x1c.resource.GetResourceRequest\x1a\x1a.resource.ResourceResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/resource/{id}\x12k\n" +
@@ -846,7 +1291,12 @@ const file_resource_proto_rawDesc = "" +
 	"\x13ListActiveResources\x12$.resource.ListActiveResourcesRequest\x1a%.resource.ListActiveResourcesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/resources/active\x12v\n" +
 	"\x0eUpdateResource\x12\x1f.resource.UpdateResourceRequest\x1a\x1a.resource.ResourceResponse\"'\x82\xd3\xe4\x93\x02!:\bresource\x1a\x15/api/v1/resource/{id}\x12h\n" +
 	"\x0eDeleteResource\x12\x1f.resource.DeleteResourceRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/resource/{id}\x12K\n" +
-	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponseB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
+	"\x12ValidateForRequest\x12\x19.resource.ValidateRequest\x1a\x1a.resource.ValidateResponse\x12\x91\x01\n" +
+	"\x14ListResourcesByOwner\x12%.resource.ListResourcesByOwnerRequest\x1a&.resource.ListResourcesByOwnerResponse\"*\x82\xd3\xe4\x93\x02$\x12\"/api/v1/resources/owner/{owner_id}\x12x\n" +
+	"\x0fSearchResources\x12 .resource.SearchResourcesRequest\x1a!.resource.SearchResourcesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/resources/search\x12y\n" +
+	"\x0fArchiveResource\x12 .resource.ArchiveResourceRequest\x1a\x1a.resource.ResourceResponse\"(\x82\xd3\xe4\x93\x02\":\x01*2\x1d/api/v1/resource/{id}/archive\x12y\n" +
+	"\x0fRestoreResource\x12 .resource.RestoreResourceRequest\x1a\x1a.resource.ResourceResponse\"(\x82\xd3\xe4\x93\x02\":\x01*2\x1d/api/v1/resource/{id}/restore\x12t\n" +
+	"\x0eCountResources\x12\x1f.resource.CountResourcesRequest\x1a .resource.CountResourcesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/resources/countB9Z7github.com/BlackHole55/unishare-proto/resource;resourceb\x06proto3"
 
 var (
 	file_resource_proto_rawDescOnce sync.Once
@@ -861,51 +1311,71 @@ func file_resource_proto_rawDescGZIP() []byte {
 }
 
 var file_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_resource_proto_goTypes = []any{
-	(ResourceStatus)(0),                 // 0: resource.ResourceStatus
-	(*ResourceResponse)(nil),            // 1: resource.ResourceResponse
-	(*CreateResourceRequest)(nil),       // 2: resource.CreateResourceRequest
-	(*GetResourceRequest)(nil),          // 3: resource.GetResourceRequest
-	(*ListResourcesRequest)(nil),        // 4: resource.ListResourcesRequest
-	(*ListResourcesResponse)(nil),       // 5: resource.ListResourcesResponse
-	(*ListActiveResourcesRequest)(nil),  // 6: resource.ListActiveResourcesRequest
-	(*ListActiveResourcesResponse)(nil), // 7: resource.ListActiveResourcesResponse
-	(*UpdateResourceRequest)(nil),       // 8: resource.UpdateResourceRequest
-	(*DeleteResourceRequest)(nil),       // 9: resource.DeleteResourceRequest
-	(*ValidateRequest)(nil),             // 10: resource.ValidateRequest
-	(*ValidateResponse)(nil),            // 11: resource.ValidateResponse
-	(*timestamppb.Timestamp)(nil),       // 12: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),       // 13: google.protobuf.FieldMask
-	(*emptypb.Empty)(nil),               // 14: google.protobuf.Empty
+	(ResourceStatus)(0),                  // 0: resource.ResourceStatus
+	(*ResourceResponse)(nil),             // 1: resource.ResourceResponse
+	(*CreateResourceRequest)(nil),        // 2: resource.CreateResourceRequest
+	(*GetResourceRequest)(nil),           // 3: resource.GetResourceRequest
+	(*ListResourcesRequest)(nil),         // 4: resource.ListResourcesRequest
+	(*ListResourcesResponse)(nil),        // 5: resource.ListResourcesResponse
+	(*ListActiveResourcesRequest)(nil),   // 6: resource.ListActiveResourcesRequest
+	(*ListActiveResourcesResponse)(nil),  // 7: resource.ListActiveResourcesResponse
+	(*UpdateResourceRequest)(nil),        // 8: resource.UpdateResourceRequest
+	(*DeleteResourceRequest)(nil),        // 9: resource.DeleteResourceRequest
+	(*ValidateRequest)(nil),              // 10: resource.ValidateRequest
+	(*ValidateResponse)(nil),             // 11: resource.ValidateResponse
+	(*ListResourcesByOwnerRequest)(nil),  // 12: resource.ListResourcesByOwnerRequest
+	(*ListResourcesByOwnerResponse)(nil), // 13: resource.ListResourcesByOwnerResponse
+	(*SearchResourcesRequest)(nil),       // 14: resource.SearchResourcesRequest
+	(*SearchResourcesResponse)(nil),      // 15: resource.SearchResourcesResponse
+	(*ArchiveResourceRequest)(nil),       // 16: resource.ArchiveResourceRequest
+	(*RestoreResourceRequest)(nil),       // 17: resource.RestoreResourceRequest
+	(*CountResourcesRequest)(nil),        // 18: resource.CountResourcesRequest
+	(*CountResourcesResponse)(nil),       // 19: resource.CountResourcesResponse
+	(*timestamppb.Timestamp)(nil),        // 20: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),        // 21: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),                // 22: google.protobuf.Empty
 }
 var file_resource_proto_depIdxs = []int32{
 	0,  // 0: resource.ResourceResponse.status:type_name -> resource.ResourceStatus
-	12, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
-	12, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
+	20, // 1: resource.ResourceResponse.created_at:type_name -> google.protobuf.Timestamp
+	20, // 2: resource.ResourceResponse.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 3: resource.ListResourcesResponse.resources:type_name -> resource.ResourceResponse
 	1,  // 4: resource.ListActiveResourcesResponse.resources:type_name -> resource.ResourceResponse
 	1,  // 5: resource.UpdateResourceRequest.resource:type_name -> resource.ResourceResponse
-	13, // 6: resource.UpdateResourceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	2,  // 7: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
-	3,  // 8: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
-	4,  // 9: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
-	6,  // 10: resource.ResourceService.ListActiveResources:input_type -> resource.ListActiveResourcesRequest
-	8,  // 11: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
-	9,  // 12: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
-	10, // 13: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
-	1,  // 14: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
-	1,  // 15: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
-	5,  // 16: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
-	7,  // 17: resource.ResourceService.ListActiveResources:output_type -> resource.ListActiveResourcesResponse
-	1,  // 18: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
-	14, // 19: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
-	11, // 20: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	21, // 6: resource.UpdateResourceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	1,  // 7: resource.ListResourcesByOwnerResponse.resources:type_name -> resource.ResourceResponse
+	1,  // 8: resource.SearchResourcesResponse.resources:type_name -> resource.ResourceResponse
+	2,  // 9: resource.ResourceService.CreateResource:input_type -> resource.CreateResourceRequest
+	3,  // 10: resource.ResourceService.GetResource:input_type -> resource.GetResourceRequest
+	4,  // 11: resource.ResourceService.ListResources:input_type -> resource.ListResourcesRequest
+	6,  // 12: resource.ResourceService.ListActiveResources:input_type -> resource.ListActiveResourcesRequest
+	8,  // 13: resource.ResourceService.UpdateResource:input_type -> resource.UpdateResourceRequest
+	9,  // 14: resource.ResourceService.DeleteResource:input_type -> resource.DeleteResourceRequest
+	10, // 15: resource.ResourceService.ValidateForRequest:input_type -> resource.ValidateRequest
+	12, // 16: resource.ResourceService.ListResourcesByOwner:input_type -> resource.ListResourcesByOwnerRequest
+	14, // 17: resource.ResourceService.SearchResources:input_type -> resource.SearchResourcesRequest
+	16, // 18: resource.ResourceService.ArchiveResource:input_type -> resource.ArchiveResourceRequest
+	17, // 19: resource.ResourceService.RestoreResource:input_type -> resource.RestoreResourceRequest
+	18, // 20: resource.ResourceService.CountResources:input_type -> resource.CountResourcesRequest
+	1,  // 21: resource.ResourceService.CreateResource:output_type -> resource.ResourceResponse
+	1,  // 22: resource.ResourceService.GetResource:output_type -> resource.ResourceResponse
+	5,  // 23: resource.ResourceService.ListResources:output_type -> resource.ListResourcesResponse
+	7,  // 24: resource.ResourceService.ListActiveResources:output_type -> resource.ListActiveResourcesResponse
+	1,  // 25: resource.ResourceService.UpdateResource:output_type -> resource.ResourceResponse
+	22, // 26: resource.ResourceService.DeleteResource:output_type -> google.protobuf.Empty
+	11, // 27: resource.ResourceService.ValidateForRequest:output_type -> resource.ValidateResponse
+	13, // 28: resource.ResourceService.ListResourcesByOwner:output_type -> resource.ListResourcesByOwnerResponse
+	15, // 29: resource.ResourceService.SearchResources:output_type -> resource.SearchResourcesResponse
+	1,  // 30: resource.ResourceService.ArchiveResource:output_type -> resource.ResourceResponse
+	1,  // 31: resource.ResourceService.RestoreResource:output_type -> resource.ResourceResponse
+	19, // 32: resource.ResourceService.CountResources:output_type -> resource.CountResourcesResponse
+	21, // [21:33] is the sub-list for method output_type
+	9,  // [9:21] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_resource_proto_init() }
@@ -919,7 +1389,7 @@ func file_resource_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_resource_proto_rawDesc), len(file_resource_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
