@@ -641,7 +641,7 @@ func (x *ListActiveRequestsResponse) GetTotalCount() int32 {
 
 type ListRequestsByOwnerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	OwnerId       string                 `protobuf:"bytes,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -678,9 +678,9 @@ func (*ListRequestsByOwnerRequest) Descriptor() ([]byte, []int) {
 	return file_request_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ListRequestsByOwnerRequest) GetId() string {
+func (x *ListRequestsByOwnerRequest) GetOwnerId() string {
 	if x != nil {
-		return x.Id
+		return x.OwnerId
 	}
 	return ""
 }
@@ -1164,9 +1164,9 @@ const file_request_proto_rawDesc = "" +
 	"\brequests\x18\x01 \x03(\v2\x10.request.RequestR\brequests\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"h\n" +
-	"\x1aListRequestsByOwnerRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"totalCount\"s\n" +
+	"\x1aListRequestsByOwnerRequest\x12\x19\n" +
+	"\bowner_id\x18\x01 \x01(\tR\aownerId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tR\tpageToken\"\x94\x01\n" +
@@ -1196,14 +1196,14 @@ const file_request_proto_rawDesc = "" +
 	"\x16REQUEST_STATUS_PENDING\x10\x01\x12\x1b\n" +
 	"\x17REQUEST_STATUS_APPROVED\x10\x02\x12\x1b\n" +
 	"\x17REQUEST_STATUS_REJECTED\x10\x03\x12\x1b\n" +
-	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\xbb\x06\n" +
+	"\x17REQUEST_STATUS_ARCHIVED\x10\x042\xc8\x06\n" +
 	"\x0eRequestService\x12j\n" +
 	"\rCreateRequest\x12\x1d.request.CreateRequestRequest\x1a\x1e.request.CreateRequestResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/v1/request\x12c\n" +
 	"\n" +
 	"GetRequest\x12\x1a.request.GetRequestRequest\x1a\x1b.request.GetRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/request/{id}\x12e\n" +
 	"\fListRequests\x12\x1c.request.ListRequestsRequest\x1a\x1d.request.ListRequestsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/requests\x12~\n" +
-	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/requests/active\x12\x7f\n" +
-	"\x13ListRequestsByOwner\x12#.request.ListRequestsByOwnerRequest\x1a$.request.ListRequestsByOwnerResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/requests/{id}\x12\x81\x01\n" +
+	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/requests/active\x12\x8b\x01\n" +
+	"\x13ListRequestsByOwner\x12#.request.ListRequestsByOwnerRequest\x1a$.request.ListRequestsByOwnerResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/v1/users/{owner_id}/requests\x12\x81\x01\n" +
 	"\x13UpdateRequestStatus\x12#.request.UpdateRequestStatusRequest\x1a$.request.UpdateRequestStatusResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/api/v1/request/{id}\x12l\n" +
 	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/request/{id}B7Z5github.com/BlackHole55/unishare-proto/request;requestb\x06proto3"
 

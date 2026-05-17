@@ -171,7 +171,7 @@ func local_request_RequestService_ListActiveRequests_0(ctx context.Context, mars
 	return msg, metadata, err
 }
 
-var filter_RequestService_ListRequestsByOwner_0 = &utilities.DoubleArray{Encoding: map[string]int{"id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_RequestService_ListRequestsByOwner_0 = &utilities.DoubleArray{Encoding: map[string]int{"owner_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
 func request_RequestService_ListRequestsByOwner_0(ctx context.Context, marshaler runtime.Marshaler, client RequestServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
@@ -182,13 +182,13 @@ func request_RequestService_ListRequestsByOwner_0(ctx context.Context, marshaler
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	val, ok := pathParams["id"]
+	val, ok := pathParams["owner_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "owner_id")
 	}
-	protoReq.Id, err = runtime.String(val)
+	protoReq.OwnerId, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "owner_id", err)
 	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -206,13 +206,13 @@ func local_request_RequestService_ListRequestsByOwner_0(ctx context.Context, mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
-	val, ok := pathParams["id"]
+	val, ok := pathParams["owner_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "owner_id")
 	}
-	protoReq.Id, err = runtime.String(val)
+	protoReq.OwnerId, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "owner_id", err)
 	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -400,7 +400,7 @@ func RegisterRequestServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/ListRequestsByOwner", runtime.WithHTTPPathPattern("/api/v1/requests/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/ListRequestsByOwner", runtime.WithHTTPPathPattern("/api/v1/users/{owner_id}/requests"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -566,7 +566,7 @@ func RegisterRequestServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/ListRequestsByOwner", runtime.WithHTTPPathPattern("/api/v1/requests/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/ListRequestsByOwner", runtime.WithHTTPPathPattern("/api/v1/users/{owner_id}/requests"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -621,7 +621,7 @@ var (
 	pattern_RequestService_GetRequest_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "request", "id"}, ""))
 	pattern_RequestService_ListRequests_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "requests"}, ""))
 	pattern_RequestService_ListActiveRequests_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "requests", "active"}, ""))
-	pattern_RequestService_ListRequestsByOwner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "requests", "id"}, ""))
+	pattern_RequestService_ListRequestsByOwner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"api", "v1", "users", "owner_id", "requests"}, ""))
 	pattern_RequestService_UpdateRequestStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "request", "id"}, ""))
 	pattern_RequestService_DeleteRequest_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "request", "id"}, ""))
 )
