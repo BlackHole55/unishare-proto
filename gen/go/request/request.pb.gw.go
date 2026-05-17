@@ -457,7 +457,7 @@ func RegisterRequestServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/ApproveRequest", runtime.WithHTTPPathPattern("/api/v1/request/{id}/approve"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/ApproveRequest", runtime.WithHTTPPathPattern("/api/v1/request/approve/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -477,7 +477,7 @@ func RegisterRequestServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/RejectRequest", runtime.WithHTTPPathPattern("/api/v1/request/{id}/reject"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/request.RequestService/RejectRequest", runtime.WithHTTPPathPattern("/api/v1/request/reject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -640,7 +640,7 @@ func RegisterRequestServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/ApproveRequest", runtime.WithHTTPPathPattern("/api/v1/request/{id}/approve"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/ApproveRequest", runtime.WithHTTPPathPattern("/api/v1/request/approve/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -657,7 +657,7 @@ func RegisterRequestServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/RejectRequest", runtime.WithHTTPPathPattern("/api/v1/request/{id}/reject"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/request.RequestService/RejectRequest", runtime.WithHTTPPathPattern("/api/v1/request/reject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -696,8 +696,8 @@ var (
 	pattern_RequestService_ListRequests_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "requests"}, ""))
 	pattern_RequestService_ListActiveRequests_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "requests", "active"}, ""))
 	pattern_RequestService_UpdateRequestStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "request", "id"}, ""))
-	pattern_RequestService_ApproveRequest_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"api", "v1", "request", "id", "approve"}, ""))
-	pattern_RequestService_RejectRequest_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"api", "v1", "request", "id", "reject"}, ""))
+	pattern_RequestService_ApproveRequest_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "request", "approve", "id"}, ""))
+	pattern_RequestService_RejectRequest_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "request", "reject", "id"}, ""))
 	pattern_RequestService_DeleteRequest_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "request", "id"}, ""))
 )
 

@@ -1074,8 +1074,8 @@ const file_request_proto_rawDesc = "" +
 	"\fListRequests\x12\x1c.request.ListRequestsRequest\x1a\x1d.request.ListRequestsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/requests\x12~\n" +
 	"\x12ListActiveRequests\x12\".request.ListActiveRequestsRequest\x1a#.request.ListActiveRequestsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/requests/active\x12\x81\x01\n" +
 	"\x13UpdateRequestStatus\x12#.request.UpdateRequestStatusRequest\x1a$.request.UpdateRequestStatusResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/api/v1/request/{id}\x12z\n" +
-	"\x0eApproveRequest\x12\x1e.request.ApproveRequestRequest\x1a\x1f.request.ApproveRequestResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/api/v1/request/{id}/approve\x12v\n" +
-	"\rRejectRequest\x12\x1d.request.RejectRequestRequest\x1a\x1e.request.RejectRequestResponse\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/api/v1/request/{id}/reject\x12l\n" +
+	"\x0eApproveRequest\x12\x1e.request.ApproveRequestRequest\x1a\x1f.request.ApproveRequestResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/api/v1/request/approve/{id}\x12v\n" +
+	"\rRejectRequest\x12\x1d.request.RejectRequestRequest\x1a\x1e.request.RejectRequestResponse\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/api/v1/request/reject/{id}\x12l\n" +
 	"\rDeleteRequest\x12\x1d.request.DeleteRequestRequest\x1a\x1e.request.DeleteRequestResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/request/{id}B7Z5github.com/BlackHole55/unishare-proto/request;requestb\x06proto3"
 
 var (
