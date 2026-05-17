@@ -47,6 +47,12 @@ service RequestService {
     };
   };
 
+  rpc ListRequestsByOwner(ListRequestsByOwnerRequest) returns (ListRequestsByOwnerResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/requests/{id}"
+    };
+  };
+
   // Update request
   rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse) {
     option (google.api.http) = {
@@ -55,21 +61,21 @@ service RequestService {
     };
   };
 
-  // Approve request
-  rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
-    option (google.api.http) = {
-      patch: "/api/v1/requests/{id}/approve"
-      body: ""
-    };
-  };
+  // // Approve request
+  // rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
+  //   option (google.api.http) = {
+  //     patch: "/api/v1/requests/{id}/approve"
+  //     body: ""
+  //   };
+  // };
 
-  // Reject request
-  rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
-    option (google.api.http) = {
-      patch: "/api/v1/requests/{id}/reject"
-      body: ""
-    };
-  };
+  // // Reject request
+  // rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
+  //   option (google.api.http) = {
+  //     patch: "/api/v1/requests/{id}/reject"
+  //     body: ""
+  //   };
+  // };
 
   // Permanently delete a request record.
   rpc DeleteRequest(DeleteRequestRequest) returns (DeleteRequestResponse) {
@@ -136,6 +142,18 @@ message ListActiveRequestsRequest {
 }
 
 message ListActiveRequestsResponse {
+  repeated Request requests = 1;
+  string           next_page_token = 2;
+  int32            total_count     = 3;
+}
+
+message ListRequestsByOwnerRequest {
+  string id          = 1;
+  int32  page_size   = 2;
+  string page_token  = 3;
+}
+
+message ListRequestsByOwnerResponse {
   repeated Request requests = 1;
   string           next_page_token = 2;
   int32            total_count     = 3;
