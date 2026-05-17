@@ -974,6 +974,7 @@ func (x *CheckUserBannedRequest) GetUserId() string {
 type CheckUserBannedResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IsActive      bool                   `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1013,6 +1014,13 @@ func (x *CheckUserBannedResponse) GetIsActive() bool {
 		return x.IsActive
 	}
 	return false
+}
+
+func (x *CheckUserBannedResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
 }
 
 type VerifyEmailRequest struct {
@@ -1161,9 +1169,10 @@ const file_identity_proto_rawDesc = "" +
 	"\x1aDemoteFromModeratorRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"1\n" +
 	"\x16CheckUserBannedRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"6\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"L\n" +
 	"\x17CheckUserBannedResponse\x12\x1b\n" +
-	"\tis_active\x18\x01 \x01(\bR\bisActive\"(\n" +
+	"\tis_active\x18\x01 \x01(\bR\bisActive\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\"(\n" +
 	"\x12VerifyEmailRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\":\n" +
 	"\x13RefreshTokenRequest\x12#\n" +
