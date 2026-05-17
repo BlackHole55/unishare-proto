@@ -24,6 +24,8 @@ const (
 	RequestService_ListRequests_FullMethodName        = "/request.RequestService/ListRequests"
 	RequestService_ListActiveRequests_FullMethodName  = "/request.RequestService/ListActiveRequests"
 	RequestService_UpdateRequestStatus_FullMethodName = "/request.RequestService/UpdateRequestStatus"
+	RequestService_ApproveRequest_FullMethodName      = "/request.RequestService/ApproveRequest"
+	RequestService_RejectRequest_FullMethodName       = "/request.RequestService/RejectRequest"
 	RequestService_DeleteRequest_FullMethodName       = "/request.RequestService/DeleteRequest"
 )
 
@@ -41,8 +43,12 @@ type RequestServiceClient interface {
 	ListRequests(ctx context.Context, in *ListRequestsRequest, opts ...grpc.CallOption) (*ListRequestsResponse, error)
 	// List all requests excluding archived ones.
 	ListActiveRequests(ctx context.Context, in *ListActiveRequestsRequest, opts ...grpc.CallOption) (*ListActiveRequestsResponse, error)
-	// Transition a request to APPROVED, REJECTED, or ARCHIVED.
+	// Update request
 	UpdateRequestStatus(ctx context.Context, in *UpdateRequestStatusRequest, opts ...grpc.CallOption) (*UpdateRequestStatusResponse, error)
+	// Approve request
+	ApproveRequest(ctx context.Context, in *ApproveRequestRequest, opts ...grpc.CallOption) (*ApproveRequestResponse, error)
+	// Reject request
+	RejectRequest(ctx context.Context, in *RejectRequestRequest, opts ...grpc.CallOption) (*RejectRequestResponse, error)
 	// Permanently delete a request record.
 	DeleteRequest(ctx context.Context, in *DeleteRequestRequest, opts ...grpc.CallOption) (*DeleteRequestResponse, error)
 }
@@ -105,6 +111,26 @@ func (c *requestServiceClient) UpdateRequestStatus(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *requestServiceClient) ApproveRequest(ctx context.Context, in *ApproveRequestRequest, opts ...grpc.CallOption) (*ApproveRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveRequestResponse)
+	err := c.cc.Invoke(ctx, RequestService_ApproveRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *requestServiceClient) RejectRequest(ctx context.Context, in *RejectRequestRequest, opts ...grpc.CallOption) (*RejectRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RejectRequestResponse)
+	err := c.cc.Invoke(ctx, RequestService_RejectRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *requestServiceClient) DeleteRequest(ctx context.Context, in *DeleteRequestRequest, opts ...grpc.CallOption) (*DeleteRequestResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteRequestResponse)
@@ -129,8 +155,12 @@ type RequestServiceServer interface {
 	ListRequests(context.Context, *ListRequestsRequest) (*ListRequestsResponse, error)
 	// List all requests excluding archived ones.
 	ListActiveRequests(context.Context, *ListActiveRequestsRequest) (*ListActiveRequestsResponse, error)
-	// Transition a request to APPROVED, REJECTED, or ARCHIVED.
+	// Update request
 	UpdateRequestStatus(context.Context, *UpdateRequestStatusRequest) (*UpdateRequestStatusResponse, error)
+	// Approve request
+	ApproveRequest(context.Context, *ApproveRequestRequest) (*ApproveRequestResponse, error)
+	// Reject request
+	RejectRequest(context.Context, *RejectRequestRequest) (*RejectRequestResponse, error)
 	// Permanently delete a request record.
 	DeleteRequest(context.Context, *DeleteRequestRequest) (*DeleteRequestResponse, error)
 	mustEmbedUnimplementedRequestServiceServer()
@@ -157,6 +187,12 @@ func (UnimplementedRequestServiceServer) ListActiveRequests(context.Context, *Li
 }
 func (UnimplementedRequestServiceServer) UpdateRequestStatus(context.Context, *UpdateRequestStatusRequest) (*UpdateRequestStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateRequestStatus not implemented")
+}
+func (UnimplementedRequestServiceServer) ApproveRequest(context.Context, *ApproveRequestRequest) (*ApproveRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApproveRequest not implemented")
+}
+func (UnimplementedRequestServiceServer) RejectRequest(context.Context, *RejectRequestRequest) (*RejectRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RejectRequest not implemented")
 }
 func (UnimplementedRequestServiceServer) DeleteRequest(context.Context, *DeleteRequestRequest) (*DeleteRequestResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteRequest not implemented")
@@ -272,6 +308,42 @@ func _RequestService_UpdateRequestStatus_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RequestService_ApproveRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).ApproveRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_ApproveRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).ApproveRequest(ctx, req.(*ApproveRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RequestService_RejectRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RequestServiceServer).RejectRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RequestService_RejectRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RequestServiceServer).RejectRequest(ctx, req.(*RejectRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RequestService_DeleteRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRequestRequest)
 	if err := dec(in); err != nil {
@@ -316,6 +388,14 @@ var RequestService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateRequestStatus",
 			Handler:    _RequestService_UpdateRequestStatus_Handler,
+		},
+		{
+			MethodName: "ApproveRequest",
+			Handler:    _RequestService_ApproveRequest_Handler,
+		},
+		{
+			MethodName: "RejectRequest",
+			Handler:    _RequestService_RejectRequest_Handler,
 		},
 		{
 			MethodName: "DeleteRequest",

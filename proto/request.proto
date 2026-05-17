@@ -47,11 +47,25 @@ service RequestService {
     };
   };
 
-  // Transition a request to APPROVED, REJECTED, or ARCHIVED.
+  // Update request
   rpc UpdateRequestStatus(UpdateRequestStatusRequest) returns (UpdateRequestStatusResponse) {
     option (google.api.http) = {
       patch: "/api/v1/request/{id}"
       body: "*"
+    };
+  };
+
+  // Approve request
+  rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/approve"
+    };
+  };
+
+  // Reject request
+  rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
+    option (google.api.http) = {
+      patch: "/api/v1/request/reject"
     };
   };
 
@@ -125,13 +139,28 @@ message ListActiveRequestsResponse {
   int32            total_count     = 3;
 }
 
-// UpdateRequestStatus  (approve / reject / archive)
 message UpdateRequestStatusRequest {
   string        id     = 1;
-  RequestStatus status = 2;  // new status; PENDING and UNSPECIFIED are invalid here
+  RequestStatus status = 2;
 }
 
 message UpdateRequestStatusResponse {
+  Request request = 1;
+}
+
+message ApproveRequestRequest {
+  string id = 1;
+}
+
+message ApproveRequestResponse {
+  Request request = 1;
+}
+
+message RejectRequestRequest {
+  string id = 1;
+}
+
+message RejectRequestResponse {
   Request request = 1;
 }
 
