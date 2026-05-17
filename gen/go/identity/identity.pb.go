@@ -1059,6 +1059,50 @@ func (x *VerifyEmailRequest) GetCode() string {
 	return ""
 }
 
+type RefreshTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenRequest) Reset() {
+	*x = RefreshTokenRequest{}
+	mi := &file_identity_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenRequest) ProtoMessage() {}
+
+func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
+	return file_identity_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *RefreshTokenRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
 var File_identity_proto protoreflect.FileDescriptor
 
 const file_identity_proto_rawDesc = "" +
@@ -1121,7 +1165,9 @@ const file_identity_proto_rawDesc = "" +
 	"\x17CheckUserBannedResponse\x12\x1b\n" +
 	"\tis_active\x18\x01 \x01(\bR\bisActive\"(\n" +
 	"\x12VerifyEmailRequest\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code*Y\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\":\n" +
+	"\x13RefreshTokenRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken*Y\n" +
 	"\n" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
@@ -1131,8 +1177,7 @@ const file_identity_proto_rawDesc = "" +
 	"\tROLE_USER\x10\x00\x12\x12\n" +
 	"\x0eROLE_MODERATOR\x10\x01\x12\x0e\n" +
 	"\n" +
-	"ROLE_ADMIN\x10\x022\xdf\n" +
-	"\n" +
+	"ROLE_ADMIN\x10\x022\xc7\v\n" +
 	"\x0fIdentityService\x12c\n" +
 	"\bRegister\x12\x19.identity.RegisterRequest\x1a\x1a.identity.RegisterResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/auth/register\x12V\n" +
 	"\x05Login\x12\x16.identity.LoginRequest\x1a\x16.identity.AuthResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/auth/login\x12\\\n" +
@@ -1148,7 +1193,8 @@ const file_identity_proto_rawDesc = "" +
 	"\x13DemoteFromModerator\x12$.identity.DemoteFromModeratorRequest\x1a\x16.identity.UserResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/v1/users/{user_id}/demote\x12V\n" +
 	"\x0fCheckUserBanned\x12 .identity.CheckUserBannedRequest\x1a!.identity.CheckUserBannedResponse\x12i\n" +
 	"\vVerifyEmail\x12\x1c.identity.VerifyEmailRequest\x1a\x16.identity.AuthResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/auth/verify-email\x12~\n" +
-	"\x16ResendVerificationCode\x12'.identity.ResendVerificationCodeRequest\x1a\x16.google.protobuf.Empty\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/v1/auth/resend-codeB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
+	"\x16ResendVerificationCode\x12'.identity.ResendVerificationCodeRequest\x1a\x16.google.protobuf.Empty\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/v1/auth/resend-code\x12f\n" +
+	"\fRefreshToken\x12\x1d.identity.RefreshTokenRequest\x1a\x16.identity.AuthResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/auth/refreshB9Z7github.com/BlackHole55/unishare-proto/identity;identityb\x06proto3"
 
 var (
 	file_identity_proto_rawDescOnce sync.Once
@@ -1163,7 +1209,7 @@ func file_identity_proto_rawDescGZIP() []byte {
 }
 
 var file_identity_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_identity_proto_goTypes = []any{
 	(UserStatus)(0),                       // 0: identity.UserStatus
 	(UserRole)(0),                         // 1: identity.UserRole
@@ -1185,20 +1231,21 @@ var file_identity_proto_goTypes = []any{
 	(*CheckUserBannedRequest)(nil),        // 17: identity.CheckUserBannedRequest
 	(*CheckUserBannedResponse)(nil),       // 18: identity.CheckUserBannedResponse
 	(*VerifyEmailRequest)(nil),            // 19: identity.VerifyEmailRequest
-	(*timestamppb.Timestamp)(nil),         // 20: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),         // 21: google.protobuf.FieldMask
-	(*emptypb.Empty)(nil),                 // 22: google.protobuf.Empty
+	(*RefreshTokenRequest)(nil),           // 20: identity.RefreshTokenRequest
+	(*timestamppb.Timestamp)(nil),         // 21: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),         // 22: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),                 // 23: google.protobuf.Empty
 }
 var file_identity_proto_depIdxs = []int32{
 	1,  // 0: identity.UserResponse.role:type_name -> identity.UserRole
 	0,  // 1: identity.UserResponse.status:type_name -> identity.UserStatus
-	20, // 2: identity.UserResponse.created_at:type_name -> google.protobuf.Timestamp
-	20, // 3: identity.UserResponse.updated_at:type_name -> google.protobuf.Timestamp
+	21, // 2: identity.UserResponse.created_at:type_name -> google.protobuf.Timestamp
+	21, // 3: identity.UserResponse.updated_at:type_name -> google.protobuf.Timestamp
 	2,  // 4: identity.RegisterResponse.user:type_name -> identity.UserResponse
 	2,  // 5: identity.AuthResponse.user:type_name -> identity.UserResponse
 	1,  // 6: identity.UpdateUserRequest.role:type_name -> identity.UserRole
 	0,  // 7: identity.UpdateUserRequest.status:type_name -> identity.UserStatus
-	21, // 8: identity.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	22, // 8: identity.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
 	2,  // 9: identity.GetUsersResponse.users:type_name -> identity.UserResponse
 	6,  // 10: identity.IdentityService.Register:input_type -> identity.RegisterRequest
 	7,  // 11: identity.IdentityService.Login:input_type -> identity.LoginRequest
@@ -1213,21 +1260,23 @@ var file_identity_proto_depIdxs = []int32{
 	17, // 20: identity.IdentityService.CheckUserBanned:input_type -> identity.CheckUserBannedRequest
 	19, // 21: identity.IdentityService.VerifyEmail:input_type -> identity.VerifyEmailRequest
 	3,  // 22: identity.IdentityService.ResendVerificationCode:input_type -> identity.ResendVerificationCodeRequest
-	4,  // 23: identity.IdentityService.Register:output_type -> identity.RegisterResponse
-	5,  // 24: identity.IdentityService.Login:output_type -> identity.AuthResponse
-	2,  // 25: identity.IdentityService.GetUser:output_type -> identity.UserResponse
-	11, // 26: identity.IdentityService.ListUsers:output_type -> identity.GetUsersResponse
-	2,  // 27: identity.IdentityService.UpdateUser:output_type -> identity.UserResponse
-	22, // 28: identity.IdentityService.DeleteUser:output_type -> google.protobuf.Empty
-	22, // 29: identity.IdentityService.BanUser:output_type -> google.protobuf.Empty
-	22, // 30: identity.IdentityService.UnbanUser:output_type -> google.protobuf.Empty
-	2,  // 31: identity.IdentityService.PromoteToModerator:output_type -> identity.UserResponse
-	2,  // 32: identity.IdentityService.DemoteFromModerator:output_type -> identity.UserResponse
-	18, // 33: identity.IdentityService.CheckUserBanned:output_type -> identity.CheckUserBannedResponse
-	5,  // 34: identity.IdentityService.VerifyEmail:output_type -> identity.AuthResponse
-	22, // 35: identity.IdentityService.ResendVerificationCode:output_type -> google.protobuf.Empty
-	23, // [23:36] is the sub-list for method output_type
-	10, // [10:23] is the sub-list for method input_type
+	20, // 23: identity.IdentityService.RefreshToken:input_type -> identity.RefreshTokenRequest
+	4,  // 24: identity.IdentityService.Register:output_type -> identity.RegisterResponse
+	5,  // 25: identity.IdentityService.Login:output_type -> identity.AuthResponse
+	2,  // 26: identity.IdentityService.GetUser:output_type -> identity.UserResponse
+	11, // 27: identity.IdentityService.ListUsers:output_type -> identity.GetUsersResponse
+	2,  // 28: identity.IdentityService.UpdateUser:output_type -> identity.UserResponse
+	23, // 29: identity.IdentityService.DeleteUser:output_type -> google.protobuf.Empty
+	23, // 30: identity.IdentityService.BanUser:output_type -> google.protobuf.Empty
+	23, // 31: identity.IdentityService.UnbanUser:output_type -> google.protobuf.Empty
+	2,  // 32: identity.IdentityService.PromoteToModerator:output_type -> identity.UserResponse
+	2,  // 33: identity.IdentityService.DemoteFromModerator:output_type -> identity.UserResponse
+	18, // 34: identity.IdentityService.CheckUserBanned:output_type -> identity.CheckUserBannedResponse
+	5,  // 35: identity.IdentityService.VerifyEmail:output_type -> identity.AuthResponse
+	23, // 36: identity.IdentityService.ResendVerificationCode:output_type -> google.protobuf.Empty
+	5,  // 37: identity.IdentityService.RefreshToken:output_type -> identity.AuthResponse
+	24, // [24:38] is the sub-list for method output_type
+	10, // [10:24] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
 	10, // [10:10] is the sub-list for extension extendee
 	0,  // [0:10] is the sub-list for field type_name
@@ -1244,7 +1293,7 @@ func file_identity_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_identity_proto_rawDesc), len(file_identity_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   18,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
