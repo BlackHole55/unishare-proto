@@ -209,7 +209,7 @@ message CheckUserBannedRequest {
 }
 
 message CheckUserBannedResponse {
-  bool is_active = 1;
+  bool is_banned = 1;
 }
 
 message VerifyEmailRequest {
