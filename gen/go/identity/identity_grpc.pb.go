@@ -20,18 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IdentityService_Register_FullMethodName            = "/identity.IdentityService/Register"
-	IdentityService_Login_FullMethodName               = "/identity.IdentityService/Login"
-	IdentityService_GetUser_FullMethodName             = "/identity.IdentityService/GetUser"
-	IdentityService_ListUsers_FullMethodName           = "/identity.IdentityService/ListUsers"
-	IdentityService_UpdateUser_FullMethodName          = "/identity.IdentityService/UpdateUser"
-	IdentityService_DeleteUser_FullMethodName          = "/identity.IdentityService/DeleteUser"
-	IdentityService_BanUser_FullMethodName             = "/identity.IdentityService/BanUser"
-	IdentityService_UnbanUser_FullMethodName           = "/identity.IdentityService/UnbanUser"
-	IdentityService_PromoteToModerator_FullMethodName  = "/identity.IdentityService/PromoteToModerator"
-	IdentityService_DemoteFromModerator_FullMethodName = "/identity.IdentityService/DemoteFromModerator"
-	IdentityService_CheckUserBanned_FullMethodName     = "/identity.IdentityService/CheckUserBanned"
-	IdentityService_VerifyEmail_FullMethodName         = "/identity.IdentityService/VerifyEmail"
+	IdentityService_Register_FullMethodName               = "/identity.IdentityService/Register"
+	IdentityService_Login_FullMethodName                  = "/identity.IdentityService/Login"
+	IdentityService_GetUser_FullMethodName                = "/identity.IdentityService/GetUser"
+	IdentityService_ListUsers_FullMethodName              = "/identity.IdentityService/ListUsers"
+	IdentityService_UpdateUser_FullMethodName             = "/identity.IdentityService/UpdateUser"
+	IdentityService_DeleteUser_FullMethodName             = "/identity.IdentityService/DeleteUser"
+	IdentityService_BanUser_FullMethodName                = "/identity.IdentityService/BanUser"
+	IdentityService_UnbanUser_FullMethodName              = "/identity.IdentityService/UnbanUser"
+	IdentityService_PromoteToModerator_FullMethodName     = "/identity.IdentityService/PromoteToModerator"
+	IdentityService_DemoteFromModerator_FullMethodName    = "/identity.IdentityService/DemoteFromModerator"
+	IdentityService_CheckUserBanned_FullMethodName        = "/identity.IdentityService/CheckUserBanned"
+	IdentityService_VerifyEmail_FullMethodName            = "/identity.IdentityService/VerifyEmail"
+	IdentityService_ResendVerificationCode_FullMethodName = "/identity.IdentityService/ResendVerificationCode"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
@@ -41,7 +42,7 @@ const (
 // Identity Service
 type IdentityServiceClient interface {
 	// AUTH: Register a new user
-	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	// AUTH: Log in user
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// READ: Get a single user by ID
@@ -63,7 +64,9 @@ type IdentityServiceClient interface {
 	// INTERNAL: Check if user is currently banned
 	CheckUserBanned(ctx context.Context, in *CheckUserBannedRequest, opts ...grpc.CallOption) (*CheckUserBannedResponse, error)
 	// VERIFY CODE BY EMAIL
-	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// RESEND CODE
+	ResendVerificationCode(ctx context.Context, in *ResendVerificationCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type identityServiceClient struct {
@@ -74,9 +77,9 @@ func NewIdentityServiceClient(cc grpc.ClientConnInterface) IdentityServiceClient
 	return &identityServiceClient{cc}
 }
 
-func (c *identityServiceClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *identityServiceClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthResponse)
+	out := new(RegisterResponse)
 	err := c.cc.Invoke(ctx, IdentityService_Register_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -184,10 +187,20 @@ func (c *identityServiceClient) CheckUserBanned(ctx context.Context, in *CheckUs
 	return out, nil
 }
 
-func (c *identityServiceClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *identityServiceClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, IdentityService_VerifyEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) ResendVerificationCode(ctx context.Context, in *ResendVerificationCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, IdentityService_VerifyEmail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IdentityService_ResendVerificationCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -201,7 +214,7 @@ func (c *identityServiceClient) VerifyEmail(ctx context.Context, in *VerifyEmail
 // Identity Service
 type IdentityServiceServer interface {
 	// AUTH: Register a new user
-	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
+	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	// AUTH: Log in user
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
 	// READ: Get a single user by ID
@@ -223,7 +236,9 @@ type IdentityServiceServer interface {
 	// INTERNAL: Check if user is currently banned
 	CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error)
 	// VERIFY CODE BY EMAIL
-	VerifyEmail(context.Context, *VerifyEmailRequest) (*emptypb.Empty, error)
+	VerifyEmail(context.Context, *VerifyEmailRequest) (*AuthResponse, error)
+	// RESEND CODE
+	ResendVerificationCode(context.Context, *ResendVerificationCodeRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -234,7 +249,7 @@ type IdentityServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedIdentityServiceServer struct{}
 
-func (UnimplementedIdentityServiceServer) Register(context.Context, *RegisterRequest) (*AuthResponse, error) {
+func (UnimplementedIdentityServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Register not implemented")
 }
 func (UnimplementedIdentityServiceServer) Login(context.Context, *LoginRequest) (*AuthResponse, error) {
@@ -267,8 +282,11 @@ func (UnimplementedIdentityServiceServer) DemoteFromModerator(context.Context, *
 func (UnimplementedIdentityServiceServer) CheckUserBanned(context.Context, *CheckUserBannedRequest) (*CheckUserBannedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserBanned not implemented")
 }
-func (UnimplementedIdentityServiceServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*emptypb.Empty, error) {
+func (UnimplementedIdentityServiceServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*AuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifyEmail not implemented")
+}
+func (UnimplementedIdentityServiceServer) ResendVerificationCode(context.Context, *ResendVerificationCodeRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResendVerificationCode not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -507,6 +525,24 @@ func _IdentityService_VerifyEmail_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_ResendVerificationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResendVerificationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).ResendVerificationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_ResendVerificationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).ResendVerificationCode(ctx, req.(*ResendVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -561,6 +597,10 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyEmail",
 			Handler:    _IdentityService_VerifyEmail_Handler,
+		},
+		{
+			MethodName: "ResendVerificationCode",
+			Handler:    _IdentityService_ResendVerificationCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
