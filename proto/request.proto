@@ -58,14 +58,14 @@ service RequestService {
   // Approve request
   rpc ApproveRequest(ApproveRequestRequest) returns (ApproveRequestResponse) {
     option (google.api.http) = {
-      patch: "/api/v1/request/approve"
+      patch: "/api/v1/request/{id}/approve"
     };
   };
 
   // Reject request
   rpc RejectRequest(RejectRequestRequest) returns (RejectRequestResponse) {
     option (google.api.http) = {
-      patch: "/api/v1/request/reject"
+      patch: "/api/v1/request/{id}/reject"
     };
   };
 
